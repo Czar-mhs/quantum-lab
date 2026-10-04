@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMPHR MVP</title>
+<style>
+:root{--bg:#000;--card:#2A2A2A;--teal:#00A89D;--orange:#FF6B35;--tx:#fff;--mut:#9aa;--g:#22c55e;--y:#eab308;--o:#f97316;--r:#ef4444}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+header{border-top:4px solid var(--orange);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#111}
+header b{font-size:20px;color:var(--teal);letter-spacing:1px}header small{color:var(--mut)}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+nav button,.btn{background:var(--card);color:var(--tx);border:1px solid #444;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit}
+nav button.on,.btn.pri{background:var(--teal);border-color:var(--teal);color:#000;font-weight:600}
+.banner{background:#3a2a10;color:#ffcf99;padding:8px 20px;font-size:13px}
+main{max-width:1100px;margin:0 auto;padding:20px}
+h2{margin:0 0 14px;font-size:22px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--card);border-radius:12px;padding:16px}
+.kpi{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:18px}
+.kpi .card b{font-size:28px;display:block}.kpi .card span{color:var(--mut);font-size:13px}
+.score{display:inline-block;min-width:54px;text-align:center;padding:3px 10px;border-radius:20px;color:#000;font-weight:700}
+.bG{background:var(--g)}.bY{background:var(--y)}.bO{background:var(--o)}.bR{background:var(--r)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #3a3a3a;font-size:14px}th{color:var(--mut);font-weight:500}
+input,select,textarea{background:#1a1a1a;color:var(--tx);border:1px solid #444;border-radius:8px;padding:8px;font:inherit;width:100%}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.row>*{width:auto}
+.bar{height:8px;border-radius:4px;background:#444;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--teal)}
+a.lnk{color:var(--teal);cursor:pointer;text-decoration:underline}
+.ck li{list-style:none;padding:10px 0;border-bottom:1px solid #3a3a3a}.ck{padding:0;margin:0}
+@media(max-width:600px){nav{margin-left:0}th,td{padding:6px 4px;font-size:13px}}
+</style></head><body>
+<header><b>AMPHR</b><small>Asset Measurement Platform Health Recorder · MVP v0.1</small>
+<nav id="nav"></nav></header>
+<div class="banner">Demo build: sample buildings and data stored only in this browser (no server, no login). Do not enter confidential or real client data.</div>
+<main id="v"></main>
+<script>
+const KEY='amphr_mvp_v1',DAY=864e5;
+const today=()=>new Date(new Date().toDateString()).getTime();
+const iso=t=>new Date(t).toISOString().slice(0,10);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function seed(){const t=today(),d=n=>iso(t+n*DAY);return{
+buildings:[
+{id:1,name:'Marina Heights Tower',area:'Dubai Marina',floors:42,year:2012,compliance:'compliant',lastInsp:d(-60),dueDate:d(300),issues:{critical:0,high:1,safety:0}},
+{id:2,name:'Deira Plaza',area:'Deira',floors:18,year:1998,compliance:'due',lastInsp:d(-210),dueDate:d(45),issues:{critical:1,high:2,safety:1}},
+{id:3,name:'Business Bay Offices',area:'Business Bay',floors:30,year:2016,compliance:'compliant',lastInsp:d(-20),dueDate:d(150),issues:{critical:0,high:0,safety:0}},
+{id:4,name:'Jumeirah Court',area:'Jumeirah',floors:12,year:2005,compliance:'non',lastInsp:d(-400),dueDate:d(-15),issues:{critical:2,high:3,safety:2}},
+{id:5,name:'Al Barsha Residences',area:'Al Barsha',floors:9,year:2009,compliance:'due',lastInsp:d(-120),dueDate:d(110),issues:{critical:0,high:2,safety:1}}],
+assets:[
+{id:1,b:1,name:'Passenger Lift A',type:'Lift',status:'Good'},{id:2,b:2,name:'Chiller 1',type:'HVAC',status:'Poor'},
+{id:3,b:2,name:'Fire Pump',type:'Fire safety',status:'Fair'},{id:4,b:4,name:'Roof Waterproofing',type:'Structure',status:'Critical'},
+{id:5,b:3,name:'Generator G1',type:'Electrical',status:'Good'}],
+inspections:[
+{id:1,b:2,date:d(-210),by:'Demo Inspector',notes:'Spalling on level 3 slab; fire pump pressure low.'},
+{id:2,b:4,date:d(-400),by:'Demo Inspector',notes:'Roof membrane failure, water ingress.'}],
+nid:10}}
+let S;try{S=JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){S=seed()}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+// Health score v1 (per MVP spec)
+function health(b){
+ const st=Math.max(0,100-15*b.issues.critical-8*b.issues.high);
+ const co={compliant:100,due:50,non:0}[b.compliance];
+ const days=Math.max(0,(today()-new Date(b.lastInsp).getTime())/DAY);
+ const mt=Math.max(0,100-days/365*20);
+ const sf=Math.max(0,100-20*b.issues.safety);
+ const s=(st*.4+co*.3+mt*.2+sf*.1);
+ return{score:Math.round(Math.min(100,Math.max(0,s))),st,co,mt:Math.round(mt),sf}}
+const band=s=>s>=80?['Good','bG']:s>=60?['Fair','bY']:s>=40?['Poor','bO']:['Critical','bR'];
+const chip=s=>`<span class="score ${band(s)[1]}">${s}</span>`;
+const dleft=b=>Math.round((new Date(b.dueDate).getTime()-today())/DAY);
+const urg=n=>n<90?['bR','Red']:n<=180?['bY','Yellow']:['bG','Green'];
+let tab='dash',sel=null;
+const tabs=[['dash','Portfolio'],['comp','Compliance'],['assets','Assets'],['insp','Inspections'],['add','+ Building']];
+function nav(){document.getElementById('nav').innerHTML=tabs.map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('')}
+function go(k,id){tab=k;sel=id??null;render()}
+function render(){nav();const v=document.getElementById('v');
+ v.innerHTML=({dash,comp,assets,insp,add,detail})[tab]();window.scrollTo(0,0)}
+function dash(){
+ const bs=S.buildings.map(b=>({b,h:health(b)}));
+ const avg=bs.length?Math.round(bs.reduce((a,x)=>a+x.h.score,0)/bs.length):0;
+ const crit=bs.filter(x=>x.h.score<40).length,ovd=S.buildings.filter(b=>dleft(b)<0).length;
+ return `<h2>Portfolio dashboard</h2><div class="kpi">
+ <div class="card"><b>${S.buildings.length}</b><span>Buildings</span></div>
+ <div class="card"><b>${avg} ${chip(avg)}</b><span>Average health</span></div>
+ <div class="card"><b style="color:var(--r)">${crit}</b><span>Critical buildings</span></div>
+ <div class="card"><b style="color:var(--orange)">${ovd}</b><span>Overdue inspections</span></div></div>
+ <div class="grid">${bs.sort((a,c)=>a.h.score-c.h.score).map(({b,h})=>`<div class="card"><div class="row" style="margin:0"><b>${esc(b.name)}</b><span style="margin-left:auto">${chip(h.score)}</span></div>
+ <small style="color:var(--mut)">${esc(b.area)} · ${b.floors} floors · ${band(h.score)[0]}</small>
+ <div class="bar"><i style="width:${h.score}%"></i></div>
+ <a class="lnk" onclick="go('detail',${b.id})">View details</a></div>`).join('')||'<p>No buildings yet.</p>'}</div>`}
+function detail(){
+ const b=S.buildings.find(x=>x.id===sel);if(!b)return dash();const h=health(b),n=dleft(b),u=urg(n);
+ const parts=[['Structural (40%)',h.st],['Compliance (30%)',h.co],['Maintenance (20%)',h.mt],['Safety (10%)',h.sf]];
+ const as=S.assets.filter(a=>a.b===b.id),ins=S.inspections.filter(i=>i.b===b.id);
+ return `<p><a class="lnk" onclick="go('dash')">← Portfolio</a></p><h2>${esc(b.name)} ${chip(h.score)}</h2>
+ <p style="color:var(--mut)">${esc(b.area)} · ${b.floors} floors · built ${b.year} · ${band(h.score)[0]}</p>
+ <div class="grid"><div class="card"><b>Score breakdown</b>${parts.map(([l,v])=>`<div style="margin-top:8px">${l}: ${v}<div class="bar"><i style="width:${v}%"></i></div></div>`).join('')}</div>
+ <div class="card"><b>Compliance (Law 3/2026)</b><p>Status: ${{compliant:'Compliant',due:'Due soon',non:'Non-compliant'}[b.compliance]}<br>Next inspection due ${b.dueDate}<br><span class="score ${u[0]}">${n<0?Math.abs(n)+' days overdue':n+' days left'}</span></p>
+ <b>Open issues</b><p>Critical ${b.issues.critical} · High ${b.issues.high} · Safety ${b.issues.safety}</p></div></div>
+ <div class="card" style="margin-top:14px"><b>Assets (${as.length})</b><table>${as.map(a=>`<tr><td>${esc(a.name)}</td><td>${esc(a.type)}</td><td>${esc(a.status)}</td></tr>`).join('')||'<tr><td>None</td></tr>'}</table></div>
+ <div class="card" style="margin-top:14px"><b>Inspections</b>${ins.map(i=>`<p>${i.date} · ${esc(i.by)}<br><span style="color:var(--mut)">${esc(i.notes)}</span></p>`).join('')||'<p>None recorded.</p>'}
+ <button class="btn pri" onclick="go('insp','${b.id}')">Record inspection</button></div>
+ <p><button class="btn" onclick="delB(${b.id})">Delete building</button></p>`}
+function comp(){
+ const bs=[...S.buildings].sort((a,c)=>dleft(a)-dleft(c));
+ return `<h2>Compliance tracker</h2><p style="color:var(--mut)">Green over 180 days, yellow 90–180, red under 90. Alerts at 30, 14 and 1 day (in-app only in this demo).</p>
+ <div class="card"><table><tr><th>Building</th><th>Status</th><th>Due</th><th>Days</th></tr>${bs.map(b=>{const n=dleft(b),u=urg(n);
+ return `<tr><td><a class="lnk" onclick="go('detail',${b.id})">${esc(b.name)}</a></td><td>${{compliant:'Compliant',due:'Due soon',non:'Non-compliant'}[b.compliance]}</td><td>${b.dueDate}</td><td><span class="score ${u[0]}">${n}</span>${[30,14,1].includes(n)?' ⚠ alert':''}</td></tr>`}).join('')}</table></div>`}
+function assets(){
+ return `<h2>Asset registry</h2><div class="row"><button class="btn pri" onclick="exp()">Export CSV</button>
+ <label class="btn" style="margin:0;cursor:pointer">Import CSV<input type="file" accept=".csv" style="display:none" onchange="imp(this.files[0])"></label>
+ <small style="color:var(--mut)">Columns: building_id,name,type,status</small></div>
+ <div class="card"><table><tr><th>Building</th><th>Asset</th><th>Type</th><th>Status</th></tr>${S.assets.map(a=>`<tr><td>${esc((S.buildings.find(b=>b.id===a.b)||{}).name||'#'+a.b)}</td><td>${esc(a.name)}</td><td>${esc(a.type)}</td><td>${esc(a.status)}</td></tr>`).join('')}</table></div>
+ <div class="card" style="margin-top:14px"><b>Add asset</b><form onsubmit="addA(event)"><label>Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select>
+ <label>Name</label><input name="name" required><label>Type</label><input name="type" required><label>Status</label><select name="status"><option>Good</option><option>Fair</option><option>Poor</option><option>Critical</option></select>
+ <p><button class="btn pri">Add</button></p></form></div>`}
+function insp(){
+ return `<h2>Record inspection</h2><div class="card"><form onsubmit="addI(event)">
+ <label>Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}" ${String(b.id)===String(sel)?'selected':''}>${esc(b.name)}</option>`).join('')}</select>
+ <label>Inspector</label><input name="by" required><label>Date</label><input type="date" name="date" value="${iso(today())}" required>
+ <div class="row" style="margin-top:10px"><div><label>Critical issues</label><input type="number" min="0" name="critical" value="0"></div><div><label>High issues</label><input type="number" min="0" name="high" value="0"></div><div><label>Safety issues</label><input type="number" min="0" name="safety" value="0"></div></div>
+ <label>Compliance status</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select>
+ <label>Next due date</label><input type="date" name="due" required>
+ <label>Notes</label><textarea name="notes" rows="3"></textarea>
+ <p style="color:var(--mut);font-size:13px">Manual entry. PDF auto-parsing and photo capture are not in this demo build.</p>
+ <button class="btn pri">Save inspection</button></form></div>
+ <h2 style="margin-top:20px">History</h2><div class="card">${[...S.inspections].reverse().map(i=>`<p><b>${esc((S.buildings.find(b=>b.id===i.b)||{}).name||'')}</b> · ${i.date} · ${esc(i.by)}<br><span style="color:var(--mut)">${esc(i.notes)}</span></p>`).join('')||'None'}</div>`}
+function add(){
+ return `<h2>Add building</h2><div class="card"><form onsubmit="addB(event)"><label>Name</label><input name="name" required><label>Area</label><input name="area" required>
+ <div class="row"><div><label>Floors</label><input type="number" min="1" name="floors" value="10"></div><div><label>Year built</label><input type="number" name="year" value="2020"></div></div>
+ <label>Last inspection</label><input type="date" name="last" value="${iso(today())}" required><label>Next due</label><input type="date" name="due" required>
+ <label>Compliance status</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select>
+ <p><button class="btn pri">Add building</button> <button type="button" class="btn" onclick="if(confirm('Reset to demo data?')){S=seed();save();go('dash')}">Reset demo data</button></p></form></div>`}
+const fd=e=>{e.preventDefault();return Object.fromEntries(new FormData(e.target))};
+function addB(e){const f=fd(e);S.buildings.push({id:S.nid++,name:f.name,area:f.area,floors:+f.floors,year:+f.year,compliance:f.compliance,lastInsp:f.last,dueDate:f.due,issues:{critical:0,high:0,safety:0}});save();go('dash')}
+function delB(id){if(!confirm('Delete this building and its records?'))return;S.buildings=S.buildings.filter(b=>b.id!==id);S.assets=S.assets.filter(a=>a.b!==id);S.inspections=S.inspections.filter(i=>i.b!==id);save();go('dash')}
+function addI(e){const f=fd(e),b=S.buildings.find(x=>x.id===+f.b);if(!b)return;
+ S.inspections.push({id:S.nid++,b:b.id,date:f.date,by:f.by,notes:f.notes});
+ b.lastInsp=f.date;b.dueDate=f.due;b.compliance=f.compliance;b.issues={critical:+f.critical,high:+f.high,safety:+f.safety};save();go('detail',b.id)}
+function addA(e){const f=fd(e);S.assets.push({id:S.nid++,b:+f.b,name:f.name,type:f.type,status:f.status});save();render()}
+function exp(){const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+ const csv='building_id,name,type,status\n'+S.assets.map(a=>[a.b,q(a.name),q(a.type),a.status].join(',')).join('\n');
+ const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));l.download='amphr_assets.csv';l.click()}
+function parseCSV(t){const rows=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+ if(q){if(ch=='"'&&t[i+1]=='"'){c+='"';i++}else if(ch=='"')q=false;else c+=ch}
+ else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';rows.push(r);r=[]}else c+=ch}
+ if(c||r.length){r.push(c);rows.push(r)}return rows.filter(x=>x.some(v=>v.trim()))}
+async function imp(f){if(!f)return;const rows=parseCSV(await f.text()).slice(1);let n=0,bad=0;
+ rows.forEach(r=>{const[b,name,type,status]=r.map(x=>x.trim());
+  if(S.buildings.some(x=>x.id===+b)&&name&&type&&['Good','Fair','Poor','Critical'].includes(status)){S.assets.push({id:S.nid++,b:+b,name,type,status});n++}else bad++});
+ save();alert(`Imported ${n} assets. Skipped ${bad} invalid rows.`);render()}
+render();
+</script></body></html>
