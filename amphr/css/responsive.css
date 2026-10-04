@@ -21,3 +21,4 @@
 .mhead{display:none;align-items:center;justify-content:space-between;margin-bottom:14px}.mhead img{height:34px;width:auto}.mhead img+img{height:30px;opacity:.85}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
+main{min-width:0}
