@@ -1,41 +1,127 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AMPHR MVP</title>
-<link rel="icon" href="logo.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07090b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AMPHR</title>
+<link rel="icon" href="logo.png"><link rel="apple-touch-icon" href="logo.png">
 <style>
-:root{--bg:#000;--card:#2A2A2A;--teal:#00A89D;--orange:#FF6B35;--tx:#fff;--mut:#9aa;--g:#22c55e;--y:#eab308;--o:#f97316;--r:#ef4444}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
-header{border-top:4px solid var(--orange);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#111}
-header b{font-size:20px;color:var(--teal);letter-spacing:1px}header small{color:var(--mut)}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
-nav button,.btn{background:var(--card);color:var(--tx);border:1px solid #444;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit}
-nav button.on,.btn.pri{background:var(--teal);border-color:var(--teal);color:#000;font-weight:600}
-.banner{background:#3a2a10;color:#ffcf99;padding:8px 20px;font-size:13px}
-main{max-width:1100px;margin:0 auto;padding:20px}
-h2{margin:0 0 14px;font-size:22px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.card{background:var(--card);border-radius:12px;padding:16px}
-.kpi{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:18px}
-.kpi .card b{font-size:28px;display:block}.kpi .card span{color:var(--mut);font-size:13px}
-.score{display:inline-block;min-width:54px;text-align:center;padding:3px 10px;border-radius:20px;color:#000;font-weight:700}
-.bG{background:var(--g)}.bY{background:var(--y)}.bO{background:var(--o)}.bR{background:var(--r)}
-table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #3a3a3a;font-size:14px}th{color:var(--mut);font-weight:500}
-input,select,textarea{background:#1a1a1a;color:var(--tx);border:1px solid #444;border-radius:8px;padding:8px;font:inherit;width:100%}
-label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.row>*{width:auto}
-.bar{height:8px;border-radius:4px;background:#444;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--teal)}
-.logo{height:44px;width:auto}footer{text-align:center;padding:24px}footer img{height:56px;width:auto;opacity:.9}
-a.lnk{color:var(--teal);cursor:pointer;text-decoration:underline}
-.ck li{list-style:none;padding:10px 0;border-bottom:1px solid #3a3a3a}.ck{padding:0;margin:0}
-@media(max-width:600px){nav{margin-left:0}th,td{padding:6px 4px;font-size:13px}}
+:root{--bg:#07090b;--s1:#0f1316;--s2:#151a1e;--s3:#1c2227;--line:rgba(255,255,255,.07);--tx:#f4f7f8;--mut:#8b979e;--teal:#00c2b4;--teal2:#00a89d;--or:#ff6b35;
+--g:#34d399;--y:#fbbf24;--o:#fb923c;--r:#f87171;--rad:20px;--sb:240px;
+--sat:env(safe-area-inset-top);--sab:env(safe-area-inset-bottom);--sal:env(safe-area-inset-left);--sar:env(safe-area-inset-right)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;color:var(--tx);font:15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Inter,Roboto,sans-serif;-webkit-font-smoothing:antialiased;
+background:radial-gradient(900px 500px at 85% -10%,rgba(0,194,180,.14),transparent 60%),radial-gradient(700px 400px at -5% 110%,rgba(255,107,53,.10),transparent 60%),var(--bg);background-attachment:fixed;min-height:100vh}
+/* shell */
+.app{display:grid;grid-template-columns:var(--sb) 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:24px 16px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line);background:rgba(15,19,22,.6);backdrop-filter:blur(20px)}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 22px}
+.brand img{height:40px;width:auto}.brand b{font-size:19px;letter-spacing:.14em}.brand small{display:block;color:var(--mut);font-size:10.5px;letter-spacing:.04em;line-height:1.2;margin-top:2px}
+.nv{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;color:var(--mut);background:none;border:0;font-family:inherit;font-weight:600;font-size:14.5px;cursor:pointer;text-align:left;transition:.15s}
+.nv svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nv:hover{color:var(--tx);background:var(--s2)}
+.nv.on{color:#00110f;background:linear-gradient(135deg,var(--teal),#2de3d3);box-shadow:0 8px 24px -8px rgba(0,194,180,.55)}
+.side-foot{margin-top:auto;text-align:center;padding-top:16px;border-top:1px solid var(--line)}
+.side-foot img{height:44px;width:auto;opacity:.9}
+main{padding:32px 40px 56px;max-width:1240px;width:100%;margin:0 auto}
+.demo{display:flex;gap:10px;align-items:center;font-size:12.5px;color:#ffcfae;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);padding:9px 14px;border-radius:12px;margin-bottom:24px}
+.demo i{width:7px;height:7px;border-radius:50%;background:var(--or);flex:none;box-shadow:0 0 10px var(--or)}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+h1{margin:0;font-size:34px;letter-spacing:-.025em;line-height:1.1;font-weight:750}
+.sub{color:var(--mut);margin-top:4px;font-size:14px}
+h3{margin:0 0 14px;font-size:15px;font-weight:650;letter-spacing:-.005em}
+/* cards */
+.card{background:linear-gradient(180deg,var(--s2),var(--s1));border:1px solid var(--line);border-radius:var(--rad);padding:20px;position:relative}
+.glow{background:radial-gradient(500px 220px at 100% 0,rgba(0,194,180,.16),transparent 70%),linear-gradient(180deg,var(--s2),var(--s1))}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin-bottom:16px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.kpi b{font-size:28px;letter-spacing:-.03em;display:block;line-height:1.1;font-variant-numeric:tabular-nums}.kpi span{color:var(--mut);font-size:12.5px}
+.dist{display:flex;height:10px;border-radius:6px;overflow:hidden;gap:3px;margin:16px 0 8px}.dist i{display:block;border-radius:6px;min-width:6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mut)}.legend s{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;text-decoration:none}
+/* ring */
+.ring{position:relative;display:inline-grid;place-items:center;flex:none}
+.ring svg{transform:rotate(-90deg);overflow:visible}.ring .n{position:absolute;text-align:center;line-height:1}
+.ring .n b{display:block;font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.ring .n span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:99px;font-size:12px;font-weight:650;border:1px solid transparent}
+.pG{color:var(--g);background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.25)}.pY{color:var(--y);background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.25)}
+.pO{color:var(--o);background:rgba(251,146,60,.12);border-color:rgba(251,146,60,.25)}.pR{color:var(--r);background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.25)}
+.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+/* chips + search */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0}.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--s2);color:var(--mut);padding:8px 14px;border-radius:99px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip.on{color:#00110f;background:var(--tx);border-color:var(--tx)}
+.search{flex:1;min-width:180px}
+/* building cards */
+.bc{cursor:pointer;transition:.2s;display:flex;flex-direction:column;gap:14px}
+.bc:hover{transform:translateY(-3px);border-color:rgba(0,194,180,.4);box-shadow:0 18px 40px -20px rgba(0,194,180,.35)}
+.bc .h{display:flex;gap:16px;align-items:center}.bc h4{margin:0;font-size:17px;letter-spacing:-.01em;line-height:1.25}.bc p{margin:2px 0 0;color:var(--mut);font-size:13px}
+.meta{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12.5px;color:var(--mut);padding-top:12px;border-top:1px solid var(--line)}
+/* bars */
+.bar{height:8px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}.bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--teal2),#2de3d3)}
+.brow{display:grid;grid-template-columns:150px 1fr 38px;white-space:nowrap;gap:12px;align-items:center;padding:7px 0;font-size:13.5px}.brow b{text-align:right;font-variant-numeric:tabular-nums}
+/* tables / lists */
+.list{display:flex;flex-direction:column}
+.li{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--line)}.li:last-child{border:0}
+.li b{font-weight:620}.li small{display:block;color:var(--mut);font-size:12.5px}
+.cd{font-variant-numeric:tabular-nums;text-align:right}.cd b{font-size:22px;letter-spacing:-.03em;display:block;line-height:1}.cd small{font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.cG b{color:var(--g)}.cY b{color:var(--y)}.cR b{color:var(--r)}
+/* forms */
+label{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);margin:14px 0 6px}
+input,select,textarea{width:100%;background:var(--s1);color:var(--tx);border:1px solid var(--line);border-radius:14px;padding:13px 14px;font-family:inherit;font-size:16px;outline:0;transition:.15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238b979e' stroke-width='2'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(0,194,180,.15)}
+.f2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.f3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;border:1px solid var(--line);background:var(--s3);color:var(--tx);padding:13px 20px;font-family:inherit;font-weight:650;font-size:15px;cursor:pointer;transition:.15s;min-height:46px}
+.btn:hover{border-color:rgba(255,255,255,.2)}
+.btn.pri{background:linear-gradient(135deg,var(--teal),#2de3d3);color:#00110f;border:0;box-shadow:0 10px 26px -10px rgba(0,194,180,.6)}
+.btn.or{background:linear-gradient(135deg,var(--or),#ff9a6c);color:#2a0d00;border:0}
+.btn.danger{color:var(--r)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);font-weight:600;cursor:pointer;margin-bottom:14px;background:none;border:0;font-family:inherit;font-weight:600;font-size:15px;padding:4px 0}
+.dtop{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.empty{color:var(--mut);padding:20px;text-align:center}
+/* tabbar (phone) */
+.tabbar{display:none}
+/* iPad: icon rail */
+@media(max-width:1100px){
+ :root{--sb:88px}.brand b,.brand small,.nv span{display:none}.brand{justify-content:center;padding-bottom:18px}.nv{justify-content:center;padding:14px 0}
+ .side-foot img{height:30px}main{padding:28px 28px 48px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}
+}
+/* iPhone */
+@media(max-width:760px){
+ .app{display:block}aside{display:none}
+ main{padding:calc(var(--sat) + 16px) 16px calc(var(--sab) + 104px)}
+ h1{font-size:30px}.g2,.g3,.g4{grid-template-columns:1fr}.hero,.dtop{grid-template-columns:1fr;justify-items:center;text-align:center;gap:18px}
+ .kpis{width:100%}.kpi b{font-size:24px}.brow{grid-template-columns:128px 1fr 30px;font-size:13px}.f3{grid-template-columns:1fr}
+ .mhead{display:flex!important}
+ .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:12px;right:12px;bottom:calc(var(--sab) + 10px);z-index:20;padding:8px;border-radius:26px;background:rgba(21,26,30,.94);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 50px -10px rgba(0,0,0,.7)}
+ .tb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;border:0;background:none;color:var(--mut);font-family:inherit;font-weight:600;font-size:10.5px;border-radius:18px;cursor:pointer}
+ .tb svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .tb.on{color:var(--teal);background:rgba(0,194,180,.12)}
+ .actions .btn{flex:1}.top{margin-bottom:16px}
+}
+.mhead{display:none;align-items:center;justify-content:space-between;margin-bottom:14px}.mhead img{height:34px;width:auto}.mhead img+img{height:30px;opacity:.85}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
-<header><img src="logo.png" alt="AMPHR logo" class="logo"><b>AMPHR</b><small>Asset Measurement Platform Health Recorder · MVP v0.1</small>
-<nav id="nav"></nav></header>
-<div class="banner">Demo build: sample buildings and data stored only in this browser (no server, no login). Do not enter confidential or real client data.</div>
-<main id="v"></main>
-<footer><img src="powered.png" alt="Powered by MHS+"></footer>
+<div class="app">
+<aside>
+ <div class="brand"><img src="logo.png" alt="AMPHR"><div><b>AMPHR</b><small>Asset Health<br>Recorder</small></div></div>
+ <div id="nav" style="display:flex;flex-direction:column;gap:6px"></div>
+ <div class="side-foot"><img src="powered.png" alt="Powered by MHS+"></div>
+</aside>
+<main>
+ <div class="mhead"><img src="logo.png" alt="AMPHR"><img src="powered.png" alt="Powered by MHS+"></div>
+ <div class="demo"><i></i><span>Demo build: sample data is stored only in this browser. Don't enter confidential client data.</span></div>
+ <div id="v"></div>
+</main>
+</div>
+<nav class="tabbar" id="tabbar"></nav>
 <script>
 const KEY='amphr_mvp_v1',DAY=864e5;
 const today=()=>new Date(new Date().toDateString()).getTime();
@@ -67,72 +153,94 @@ function health(b){
  const sf=Math.max(0,100-20*b.issues.safety);
  const s=(st*.4+co*.3+mt*.2+sf*.1);
  return{score:Math.round(Math.min(100,Math.max(0,s))),st,co,mt:Math.round(mt),sf}}
-const band=s=>s>=80?['Good','bG']:s>=60?['Fair','bY']:s>=40?['Poor','bO']:['Critical','bR'];
-const chip=s=>`<span class="score ${band(s)[1]}">${s}</span>`;
+const BANDS=[['Good','G','var(--g)'],['Fair','Y','var(--y)'],['Poor','O','var(--o)'],['Critical','R','var(--r)']];
+const bi=s=>s>=80?0:s>=60?1:s>=40?2:3;
+const col=s=>BANDS[bi(s)][2];
+const pill=s=>`<span class="pill p${BANDS[bi(s)][1]}">${BANDS[bi(s)][0]}</span>`;
 const dleft=b=>Math.round((new Date(b.dueDate).getTime()-today())/DAY);
-const urg=n=>n<90?['bR','Red']:n<=180?['bY','Yellow']:['bG','Green'];
-let tab='dash',sel=null;
-const tabs=[['dash','Portfolio'],['comp','Compliance'],['assets','Assets'],['insp','Inspections'],['add','+ Building']];
-function nav(){document.getElementById('nav').innerHTML=tabs.map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('')}
+const ucls=n=>n<90?'cR':n<=180?'cY':'cG';
+const CS={compliant:'Compliant',due:'Due soon',non:'Non-compliant'};
+function ring(score,size,sw,label){const r=(size-sw)/2,c=2*Math.PI*r,k=col(score);
+ return `<div class="ring" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="${sw}"/>
+ <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${k}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c*score/100} ${c}" style="filter:drop-shadow(0 0 8px ${k})"/></svg>
+ <div class="n"><b style="font-size:${size*.32}px;color:${k}">${score}</b>${label?`<span>${label}</span>`:''}</div></div>`}
+const IC={
+ dash:'<path d="M3 13h8V3H3zM13 21h8V11h-8zM13 3v6h8V3zM3 21h8v-6H3z"/>',
+ comp:'<path d="M12 3 4 6v6c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+ assets:'<path d="M21 8 12 3 3 8l9 5zM3 8v8l9 5 9-5V8M12 13v8"/>',
+ insp:'<path d="M9 4h6l1 2h3a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3z"/><path d="m9 14 2 2 4-4"/>',
+ add:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>'};
+const tabs=[['dash','Portfolio'],['comp','Compliance'],['assets','Assets'],['insp','Inspect'],['add','Add']];
+let tab='dash',sel=null,flt=-1,q='';
+function nav(){
+ document.getElementById('nav').innerHTML=tabs.map(([k,l])=>`<button class="nv ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')" aria-label="${l}"><svg viewBox="0 0 24 24">${IC[k]}</svg><span>${l}</span></button>`).join('');
+ document.getElementById('tabbar').innerHTML=tabs.map(([k,l])=>`<button class="tb ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')"><svg viewBox="0 0 24 24">${IC[k]}</svg>${l}</button>`).join('')}
 function go(k,id){tab=k;sel=id??null;render()}
-function render(){nav();const v=document.getElementById('v');
- v.innerHTML=({dash,comp,assets,insp,add,detail})[tab]();window.scrollTo(0,0)}
+function render(){nav();document.getElementById('v').innerHTML=({dash,comp,assets,insp,add,detail})[tab]();window.scrollTo(0,0)}
+const head=(t,s,r='')=>`<div class="top"><div><h1>${t}</h1><div class="sub">${s}</div></div>${r}</div>`;
 function dash(){
- const bs=S.buildings.map(b=>({b,h:health(b)}));
- const avg=bs.length?Math.round(bs.reduce((a,x)=>a+x.h.score,0)/bs.length):0;
- const crit=bs.filter(x=>x.h.score<40).length,ovd=S.buildings.filter(b=>dleft(b)<0).length;
- return `<h2>Portfolio dashboard</h2><div class="kpi">
- <div class="card"><b>${S.buildings.length}</b><span>Buildings</span></div>
- <div class="card"><b>${avg} ${chip(avg)}</b><span>Average health</span></div>
- <div class="card"><b style="color:var(--r)">${crit}</b><span>Critical buildings</span></div>
- <div class="card"><b style="color:var(--orange)">${ovd}</b><span>Overdue inspections</span></div></div>
- <div class="grid">${bs.sort((a,c)=>a.h.score-c.h.score).map(({b,h})=>`<div class="card"><div class="row" style="margin:0"><b>${esc(b.name)}</b><span style="margin-left:auto">${chip(h.score)}</span></div>
- <small style="color:var(--mut)">${esc(b.area)} · ${b.floors} floors · ${band(h.score)[0]}</small>
- <div class="bar"><i style="width:${h.score}%"></i></div>
- <a class="lnk" onclick="go('detail',${b.id})">View details</a></div>`).join('')||'<p>No buildings yet.</p>'}</div>`}
+ const all=S.buildings.map(b=>({b,h:health(b)}));
+ const avg=all.length?Math.round(all.reduce((a,x)=>a+x.h.score,0)/all.length):0;
+ const cnt=[0,0,0,0];all.forEach(x=>cnt[bi(x.h.score)]++);
+ const ovd=S.buildings.filter(b=>dleft(b)<0).length,soon=S.buildings.filter(b=>{const n=dleft(b);return n>=0&&n<90}).length;
+ const list=all.filter(x=>(flt<0||bi(x.h.score)===flt)&&x.b.name.toLowerCase().includes(q.toLowerCase())).sort((a,c)=>a.h.score-c.h.score);
+ return head('Portfolio',new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),`<button class="btn pri" onclick="go('add')">+ Add building</button>`)+
+ `<div class="card glow hero">${ring(avg,168,14,'Portfolio')}
+  <div><h3 style="margin-bottom:2px">Average health ${pill(avg)}</h3><div class="sub">Across ${all.length} building${all.length==1?'':'s'}</div>
+  <div class="dist">${cnt.map((n,i)=>n?`<i style="flex:${n};background:${BANDS[i][2]}"></i>`:'').join('')}</div>
+  <div class="legend">${BANDS.map((b,i)=>`<span><s style="background:${b[2]}"></s>${b[0]} ${cnt[i]}</span>`).join('')}</div>
+  <div class="kpis" style="margin-top:18px"><div class="kpi"><b>${all.length}</b><span>Buildings</span></div><div class="kpi"><b style="color:var(--r)">${ovd}</b><span>Overdue</span></div><div class="kpi"><b style="color:var(--o)">${soon}</b><span>Due in 90 days</span></div></div></div></div>
+  <div class="tools"><input class="search" placeholder="Search buildings" value="${esc(q)}" oninput="q=this.value;fl()" id="sq">
+  <div class="chips">${[['All',-1],...BANDS.map((b,i)=>[b[0],i])].map(([l,i])=>`<button class="chip ${flt===i?'on':''}" onclick="flt=${i};render()">${l}</button>`).join('')}</div></div>
+  <div class="grid g3" id="bl">${cards(list)}</div>`}
+function cards(list){return list.map(({b,h})=>`<div class="card bc" onclick="go('detail',${b.id})"><div class="h">${ring(h.score,72,7)}<div><h4>${esc(b.name)}</h4><p>${esc(b.area)} · ${b.floors} floors</p></div></div>
+ <div class="meta"><span>${pill(h.score)}</span><span>${dleft(b)<0?Math.abs(dleft(b))+' days overdue':dleft(b)+' days to inspection'}</span></div></div>`).join('')||'<div class="empty card" style="grid-column:1/-1">No buildings match.</div>'}
+function fl(){const all=S.buildings.map(b=>({b,h:health(b)}));
+ document.getElementById('bl').innerHTML=cards(all.filter(x=>(flt<0||bi(x.h.score)===flt)&&x.b.name.toLowerCase().includes(q.toLowerCase())).sort((a,c)=>a.h.score-c.h.score))}
 function detail(){
- const b=S.buildings.find(x=>x.id===sel);if(!b)return dash();const h=health(b),n=dleft(b),u=urg(n);
- const parts=[['Structural (40%)',h.st],['Compliance (30%)',h.co],['Maintenance (20%)',h.mt],['Safety (10%)',h.sf]];
+ const b=S.buildings.find(x=>x.id===sel);if(!b)return dash();const h=health(b),n=dleft(b);
+ const parts=[['Structural · 40%',h.st],['Compliance · 30%',h.co],['Maintenance · 20%',h.mt],['Safety · 10%',h.sf]];
  const as=S.assets.filter(a=>a.b===b.id),ins=S.inspections.filter(i=>i.b===b.id);
- return `<p><a class="lnk" onclick="go('dash')">← Portfolio</a></p><h2>${esc(b.name)} ${chip(h.score)}</h2>
- <p style="color:var(--mut)">${esc(b.area)} · ${b.floors} floors · built ${b.year} · ${band(h.score)[0]}</p>
- <div class="grid"><div class="card"><b>Score breakdown</b>${parts.map(([l,v])=>`<div style="margin-top:8px">${l}: ${v}<div class="bar"><i style="width:${v}%"></i></div></div>`).join('')}</div>
- <div class="card"><b>Compliance (Law 3/2026)</b><p>Status: ${{compliant:'Compliant',due:'Due soon',non:'Non-compliant'}[b.compliance]}<br>Next inspection due ${b.dueDate}<br><span class="score ${u[0]}">${n<0?Math.abs(n)+' days overdue':n+' days left'}</span></p>
- <b>Open issues</b><p>Critical ${b.issues.critical} · High ${b.issues.high} · Safety ${b.issues.safety}</p></div></div>
- <div class="card" style="margin-top:14px"><b>Assets (${as.length})</b><table>${as.map(a=>`<tr><td>${esc(a.name)}</td><td>${esc(a.type)}</td><td>${esc(a.status)}</td></tr>`).join('')||'<tr><td>None</td></tr>'}</table></div>
- <div class="card" style="margin-top:14px"><b>Inspections</b>${ins.map(i=>`<p>${i.date} · ${esc(i.by)}<br><span style="color:var(--mut)">${esc(i.notes)}</span></p>`).join('')||'<p>None recorded.</p>'}
- <button class="btn pri" onclick="go('insp','${b.id}')">Record inspection</button></div>
- <p><button class="btn" onclick="delB(${b.id})">Delete building</button></p>`}
+ return `<button class="back" onclick="go('dash')">‹ Portfolio</button>`+
+ `<div class="card glow dtop" style="margin-bottom:16px">${ring(h.score,150,13,'Health')}<div><h1 style="font-size:30px">${esc(b.name)}</h1><div class="sub">${esc(b.area)} · ${b.floors} floors · built ${b.year}</div><div style="margin-top:12px">${pill(h.score)}</div></div></div>
+ <div class="grid g2" style="margin-bottom:16px">
+ <div class="card"><h3>Score breakdown</h3>${parts.map(([l,v])=>`<div class="brow"><span>${l}</span><div class="bar"><i style="width:${v}%"></i></div><b>${v}</b></div>`).join('')}</div>
+ <div class="card"><h3>Compliance · Law 3/2026</h3><div class="li" style="padding-top:0"><div><b>${CS[b.compliance]}</b><small>Next inspection ${b.dueDate}</small></div><div class="cd ${ucls(n)}"><b>${Math.abs(n)}</b><small>${n<0?'days overdue':'days left'}</small></div></div>
+ <div class="f3" style="margin-top:14px"><div class="kpi"><b style="color:var(--r)">${b.issues.critical}</b><span>Critical</span></div><div class="kpi"><b style="color:var(--o)">${b.issues.high}</b><span>High</span></div><div class="kpi"><b style="color:var(--y)">${b.issues.safety}</b><span>Safety</span></div></div></div></div>
+ <div class="grid g2"><div class="card"><h3>Assets · ${as.length}</h3><div class="list">${as.map(a=>`<div class="li"><div><b>${esc(a.name)}</b><small>${esc(a.type)}</small></div>${sp(a.status)}</div>`).join('')||'<div class="empty">No assets yet.</div>'}</div></div>
+ <div class="card"><h3>Inspections · ${ins.length}</h3><div class="list">${ins.map(i=>`<div class="li"><div><b>${i.date}</b><small>${esc(i.by)} — ${esc(i.notes)}</small></div></div>`).join('')||'<div class="empty">None recorded.</div>'}</div></div></div>
+ <div class="actions"><button class="btn pri" onclick="go('insp','${b.id}')">Record inspection</button><button class="btn danger" onclick="delB(${b.id})">Delete building</button></div>`}
+const sp=s=>{const m={Good:'G',Fair:'Y',Poor:'O',Critical:'R'}[s]||'G';return `<span class="pill p${m}">${esc(s)}</span>`};
 function comp(){
  const bs=[...S.buildings].sort((a,c)=>dleft(a)-dleft(c));
- return `<h2>Compliance tracker</h2><p style="color:var(--mut)">Green over 180 days, yellow 90–180, red under 90. Alerts at 30, 14 and 1 day (in-app only in this demo).</p>
- <div class="card"><table><tr><th>Building</th><th>Status</th><th>Due</th><th>Days</th></tr>${bs.map(b=>{const n=dleft(b),u=urg(n);
- return `<tr><td><a class="lnk" onclick="go('detail',${b.id})">${esc(b.name)}</a></td><td>${{compliant:'Compliant',due:'Due soon',non:'Non-compliant'}[b.compliance]}</td><td>${b.dueDate}</td><td><span class="score ${u[0]}">${n}</span>${[30,14,1].includes(n)?' ⚠ alert':''}</td></tr>`}).join('')}</table></div>`}
+ return head('Compliance','Law 3/2026 inspection tracker · green over 180 days, yellow 90–180, red under 90')+
+ `<div class="card"><div class="list">${bs.map(b=>{const n=dleft(b);return `<div class="li" style="cursor:pointer" onclick="go('detail',${b.id})"><div><b>${esc(b.name)}</b><small>${CS[b.compliance]} · due ${b.dueDate}${[30,14,1].includes(n)?' · ⚠ alert':''}</small></div><div class="cd ${ucls(n)}"><b>${Math.abs(n)}</b><small>${n<0?'overdue':'days'}</small></div></div>`}).join('')||'<div class="empty">No buildings.</div>'}</div></div>
+ <p class="sub" style="margin-top:12px">Alerts at 30, 14 and 1 day are in-app only in this demo.</p>`}
 function assets(){
- return `<h2>Asset registry</h2><div class="row"><button class="btn pri" onclick="exp()">Export CSV</button>
- <label class="btn" style="margin:0;cursor:pointer">Import CSV<input type="file" accept=".csv" style="display:none" onchange="imp(this.files[0])"></label>
- <small style="color:var(--mut)">Columns: building_id,name,type,status</small></div>
- <div class="card"><table><tr><th>Building</th><th>Asset</th><th>Type</th><th>Status</th></tr>${S.assets.map(a=>`<tr><td>${esc((S.buildings.find(b=>b.id===a.b)||{}).name||'#'+a.b)}</td><td>${esc(a.name)}</td><td>${esc(a.type)}</td><td>${esc(a.status)}</td></tr>`).join('')}</table></div>
- <div class="card" style="margin-top:14px"><b>Add asset</b><form onsubmit="addA(event)"><label>Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select>
- <label>Name</label><input name="name" required><label>Type</label><input name="type" required><label>Status</label><select name="status"><option>Good</option><option>Fair</option><option>Poor</option><option>Critical</option></select>
- <p><button class="btn pri">Add</button></p></form></div>`}
+ return head('Assets',`${S.assets.length} registered`,`<div class="actions" style="margin:0"><button class="btn pri" onclick="exp()">Export CSV</button><label class="btn" style="margin:0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--tx)">Import CSV<input type="file" accept=".csv" style="display:none" onchange="imp(this.files[0])"></label></div>`)+
+ `<div class="grid g2"><div class="card"><div class="list">${S.assets.map(a=>`<div class="li"><div><b>${esc(a.name)}</b><small>${esc((S.buildings.find(b=>b.id===a.b)||{}).name||'#'+a.b)} · ${esc(a.type)}</small></div>${sp(a.status)}</div>`).join('')||'<div class="empty">No assets.</div>'}</div>
+ <p class="sub" style="margin:10px 4px 0">CSV columns: building_id, name, type, status</p></div>
+ <div class="card"><h3>Add asset</h3><form onsubmit="addA(event)"><label style="margin-top:0">Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select>
+ <label>Name</label><input name="name" required><div class="f2"><div><label>Type</label><input name="type" required></div><div><label>Status</label><select name="status"><option>Good</option><option>Fair</option><option>Poor</option><option>Critical</option></select></div></div>
+ <div class="actions"><button class="btn pri">Add asset</button></div></form></div></div>`}
 function insp(){
- return `<h2>Record inspection</h2><div class="card"><form onsubmit="addI(event)">
- <label>Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}" ${String(b.id)===String(sel)?'selected':''}>${esc(b.name)}</option>`).join('')}</select>
- <label>Inspector</label><input name="by" required><label>Date</label><input type="date" name="date" value="${iso(today())}" required>
- <div class="row" style="margin-top:10px"><div><label>Critical issues</label><input type="number" min="0" name="critical" value="0"></div><div><label>High issues</label><input type="number" min="0" name="high" value="0"></div><div><label>Safety issues</label><input type="number" min="0" name="safety" value="0"></div></div>
- <label>Compliance status</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select>
- <label>Next due date</label><input type="date" name="due" required>
+ return head('Inspect','Record a manual inspection · updates the building health score')+
+ `<div class="grid g2"><div class="card"><form onsubmit="addI(event)">
+ <label style="margin-top:0">Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}" ${String(b.id)===String(sel)?'selected':''}>${esc(b.name)}</option>`).join('')}</select>
+ <div class="f2"><div><label>Inspector</label><input name="by" required></div><div><label>Date</label><input type="date" name="date" value="${iso(today())}" required></div></div>
+ <div class="f3"><div><label>Critical</label><input type="number" min="0" name="critical" value="0" inputmode="numeric"></div><div><label>High</label><input type="number" min="0" name="high" value="0" inputmode="numeric"></div><div><label>Safety</label><input type="number" min="0" name="safety" value="0" inputmode="numeric"></div></div>
+ <div class="f2"><div><label>Compliance</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select></div><div><label>Next due</label><input type="date" name="due" required></div></div>
  <label>Notes</label><textarea name="notes" rows="3"></textarea>
- <p style="color:var(--mut);font-size:13px">Manual entry. PDF auto-parsing and photo capture are not in this demo build.</p>
- <button class="btn pri">Save inspection</button></form></div>
- <h2 style="margin-top:20px">History</h2><div class="card">${[...S.inspections].reverse().map(i=>`<p><b>${esc((S.buildings.find(b=>b.id===i.b)||{}).name||'')}</b> · ${i.date} · ${esc(i.by)}<br><span style="color:var(--mut)">${esc(i.notes)}</span></p>`).join('')||'None'}</div>`}
+ <p class="sub" style="margin:10px 0 0">PDF auto-parsing and photo capture are not in this demo build.</p>
+ <div class="actions"><button class="btn pri">Save inspection</button></div></form></div>
+ <div class="card"><h3>History</h3><div class="list">${[...S.inspections].reverse().map(i=>`<div class="li"><div><b>${esc((S.buildings.find(b=>b.id===i.b)||{}).name||'')}</b><small>${i.date} · ${esc(i.by)} — ${esc(i.notes)}</small></div></div>`).join('')||'<div class="empty">None yet.</div>'}</div></div></div>`}
 function add(){
- return `<h2>Add building</h2><div class="card"><form onsubmit="addB(event)"><label>Name</label><input name="name" required><label>Area</label><input name="area" required>
- <div class="row"><div><label>Floors</label><input type="number" min="1" name="floors" value="10"></div><div><label>Year built</label><input type="number" name="year" value="2020"></div></div>
- <label>Last inspection</label><input type="date" name="last" value="${iso(today())}" required><label>Next due</label><input type="date" name="due" required>
- <label>Compliance status</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select>
- <p><button class="btn pri">Add building</button> <button type="button" class="btn" onclick="if(confirm('Reset to demo data?')){S=seed();save();go('dash')}">Reset demo data</button></p></form></div>`}
+ return head('Add building','Register a new building in the portfolio')+
+ `<div class="card" style="max-width:640px"><form onsubmit="addB(event)"><label style="margin-top:0">Name</label><input name="name" required><label>Area</label><input name="area" required>
+ <div class="f2"><div><label>Floors</label><input type="number" min="1" name="floors" value="10" inputmode="numeric"></div><div><label>Year built</label><input type="number" name="year" value="2020" inputmode="numeric"></div></div>
+ <div class="f2"><div><label>Last inspection</label><input type="date" name="last" value="${iso(today())}" required></div><div><label>Next due</label><input type="date" name="due" required></div></div>
+ <label>Compliance</label><select name="compliance"><option value="compliant">Compliant</option><option value="due">Due soon</option><option value="non">Non-compliant</option></select>
+ <div class="actions"><button class="btn pri">Add building</button><button type="button" class="btn" onclick="if(confirm('Reset to demo data?')){S=seed();save();go('dash')}">Reset demo data</button></div></form></div>`}
 const fd=e=>{e.preventDefault();return Object.fromEntries(new FormData(e.target))};
 function addB(e){const f=fd(e);S.buildings.push({id:S.nid++,name:f.name,area:f.area,floors:+f.floors,year:+f.year,compliance:f.compliance,lastInsp:f.last,dueDate:f.due,issues:{critical:0,high:0,safety:0}});save();go('dash')}
 function delB(id){if(!confirm('Delete this building and its records?'))return;S.buildings=S.buildings.filter(b=>b.id!==id);S.assets=S.assets.filter(a=>a.b!==id);S.inspections=S.inspections.filter(i=>i.b!==id);save();go('dash')}
