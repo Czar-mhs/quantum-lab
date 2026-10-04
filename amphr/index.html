@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AMPHR MVP</title>
+<link rel="icon" href="logo.png">
 <style>
 :root{--bg:#000;--card:#2A2A2A;--teal:#00A89D;--orange:#FF6B35;--tx:#fff;--mut:#9aa;--g:#22c55e;--y:#eab308;--o:#f97316;--r:#ef4444}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
@@ -25,14 +26,16 @@ input,select,textarea{background:#1a1a1a;color:var(--tx);border:1px solid #444;b
 label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.row>*{width:auto}
 .bar{height:8px;border-radius:4px;background:#444;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--teal)}
+.logo{height:44px;width:auto}footer{text-align:center;padding:24px}footer img{height:56px;width:auto;opacity:.9}
 a.lnk{color:var(--teal);cursor:pointer;text-decoration:underline}
 .ck li{list-style:none;padding:10px 0;border-bottom:1px solid #3a3a3a}.ck{padding:0;margin:0}
 @media(max-width:600px){nav{margin-left:0}th,td{padding:6px 4px;font-size:13px}}
 </style></head><body>
-<header><b>AMPHR</b><small>Asset Measurement Platform Health Recorder · MVP v0.1</small>
+<header><img src="logo.png" alt="AMPHR logo" class="logo"><b>AMPHR</b><small>Asset Measurement Platform Health Recorder · MVP v0.1</small>
 <nav id="nav"></nav></header>
 <div class="banner">Demo build: sample buildings and data stored only in this browser (no server, no login). Do not enter confidential or real client data.</div>
 <main id="v"></main>
+<footer><img src="powered.png" alt="Powered by MHS+"></footer>
 <script>
 const KEY='amphr_mvp_v1',DAY=864e5;
 const today=()=>new Date(new Date().toDateString()).getTime();
