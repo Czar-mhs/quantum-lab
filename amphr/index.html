@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>AMPHR</title>
-<link rel="icon" href="logo.png"><link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="logo.png"><link rel="apple-touch-icon" href="icon-192.png"><link rel="manifest" href="manifest.json">
 <style>
 :root{--bg:#07090b;--s1:#0f1316;--s2:#151a1e;--s3:#1c2227;--line:rgba(255,255,255,.07);--tx:#f4f7f8;--mut:#8b979e;--teal:#00c2b4;--teal2:#00a89d;--or:#ff6b35;
 --g:#34d399;--y:#fbbf24;--o:#fb923c;--r:#f87171;--rad:20px;--sb:240px;
@@ -112,6 +112,88 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 @media(max-width:980px){.pgrid{grid-template-columns:1fr}}
 @media(max-width:760px){.mtools button{width:38px;height:38px}.mhint{display:none}}
 
+/* v2: kpis, list, compliance, inspect hub */
+.kts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kt{background:linear-gradient(180deg,var(--s2),var(--s1));border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.kh{display:flex;align-items:center;gap:12px}.kh svg{width:34px;height:34px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.kh b{font-size:40px;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.kl{margin-top:10px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.ks{font-size:12.5px;color:var(--mut)}
+.seg{display:inline-flex;background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
+.seg button{border:0;background:none;color:var(--mut);padding:8px 14px;border-radius:9px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer}.seg button.on{background:var(--tx);color:#00110f}
+.seg.big{margin-bottom:18px;max-width:100%;overflow-x:auto}.seg.big button{padding:10px 18px;font-size:14px;white-space:nowrap}
+.lh,.lr{display:grid;grid-template-columns:1fr 70px 112px;gap:12px;align-items:center;padding:12px 6px}
+.lh{color:var(--mut);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.lr{border-bottom:1px solid var(--line);cursor:pointer}.lr:last-child{border:0}.lr:hover{background:rgba(255,255,255,.03)}
+.hs{font-weight:750;font-size:18px;font-variant-numeric:tabular-nums}
+.stp{display:inline-block;text-align:center;padding:7px 10px;border-radius:8px;font-weight:700;font-size:12px;letter-spacing:.06em;color:#0b0f10}
+.bG{background:var(--g)}.bY{background:var(--y)}.bO{background:var(--o)}.bR{background:var(--r)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.cgrid{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;align-items:start}
+.up{text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--mut)}
+.ch,.cr{display:grid;grid-template-columns:140px 1fr 110px;gap:14px;align-items:center}
+.ch{color:var(--mut);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 8px 12px}
+.ch .lg{display:flex;gap:12px;font-size:11px;margin-top:4px}.ch .lg s{text-decoration:none;font-weight:700}
+.ch .al{text-align:center}.ch .al small{letter-spacing:.2em;font-size:10.5px}
+.cr{padding:16px 8px;border-radius:14px;cursor:pointer;border-bottom:1px solid var(--line)}.cr.on{background:rgba(0,194,180,.08)}.cr:hover{background:rgba(255,255,255,.03)}
+.cr>b{font-size:15px}
+.trk{position:relative;padding:6px 0}.bars{display:flex;height:10px;border-radius:6px;overflow:hidden}.bars i{display:block}
+.trk u{position:absolute;top:0;width:3px;height:22px;margin-left:-1.5px;background:#fff;border-radius:2px;box-shadow:0 0 8px rgba(255,255,255,.6);text-decoration:none}
+.trk u.od{background:var(--r);animation:pulse2 1.4s infinite}@keyframes pulse2{50%{opacity:.35}}
+.tc small{display:block;color:var(--mut);font-size:12px;margin-top:6px}
+.dots{display:flex;gap:18px;justify-content:center}.dot{display:block;width:14px;height:14px;border-radius:50%}
+.wide{width:100%;margin-top:16px}
+.ah,.ar{display:grid;grid-template-columns:1fr auto;gap:10px;padding:11px 4px}.ah{color:var(--mut);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.ar{border-top:1px solid var(--line);font-size:13.5px}.ar small{display:block;color:var(--mut);font-size:12px}.at{color:var(--mut);text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums}
+.ugrid{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:16px;align-items:start}
+.drop{border:2px dashed rgba(255,255,255,.18);border-radius:20px;padding:44px 20px;text-align:center;cursor:pointer;background:rgba(255,255,255,.02);transition:.2s;display:flex;flex-direction:column;align-items:center;gap:6px;outline:0}
+.drop:hover,.drop.hv,.drop:focus-visible{border-color:var(--teal);background:rgba(0,194,180,.06)}.drop b{margin-top:10px;word-break:break-word}.drop span{color:var(--mut)}
+.pdfic{width:76px;height:76px;stroke:var(--teal);fill:none;stroke-width:2.2;stroke-linejoin:round}
+.pr{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}.pr label{margin:0}
+.iss{display:grid;grid-template-columns:1fr 140px 34px;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.sevsel{font-weight:700;color:#fff;border:0}.sevsel.s-critical{background-color:#b91c1c}.sevsel.s-high{background-color:#ea580c}.sevsel.s-medium{background-color:#ca8a04}.sevsel.s-low{background-color:#15803d}
+.xb{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--s3);color:var(--mut);cursor:pointer;font-size:18px;font-family:inherit}
+.warn{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:#fde68a;border-radius:12px;padding:10px 14px;font-size:13px;margin-bottom:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;max-width:780px}
+.stepb{background:var(--s2);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;cursor:pointer;color:var(--tx);font-family:inherit}
+.stepb b{display:block;font-size:26px;color:var(--teal);letter-spacing:-.02em}.stepb span{font-weight:650;font-size:13.5px}.stepb.on{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,194,180,.12)}
+.phone{max-width:480px;background:#0c1013;border:1px solid var(--line);border-radius:28px;padding:18px}
+.ph-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}.ph-h b{font-size:16px}
+.ckc{background:var(--s1);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.ckt{display:flex;justify-content:space-between;align-items:center;color:var(--teal);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.ckt i{font-style:normal;background:rgba(0,194,180,.2);padding:2px 9px;border-radius:7px;font-size:12px}
+.cki{display:flex;align-items:center;gap:12px;padding:7px 0}.cki input{display:none}
+.cki .bx{width:22px;height:22px;border-radius:6px;border:2px solid #52606a;flex:none;display:grid;place-items:center}
+.cki input:checked+.bx{background:var(--teal);border-color:var(--teal)}.cki input:checked+.bx:after{content:"";width:6px;height:11px;border:solid #00110f;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.cki .t{flex:1}
+.cam{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--s3);color:var(--teal);cursor:pointer;position:relative;display:grid;place-items:center;flex:none}
+.cam svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cam em{position:absolute;top:-6px;right:-6px;background:var(--or);color:#2a0d00;border-radius:99px;font-size:11px;font-style:normal;font-weight:800;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px}
+.photo{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#161c20;display:grid;place-items:center;cursor:crosshair;touch-action:manipulation}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo .ph{color:var(--mut);text-align:center}
+.pt{position:absolute;width:28px;height:28px;margin:-3px 0 0 -3px;color:var(--teal);filter:drop-shadow(0 0 4px #000)}
+.tag{position:absolute;background:var(--teal);color:#00110f;font-weight:700;padding:6px 12px;border-radius:8px;font-size:14px;transform:translate(22px,26px);white-space:nowrap}
+.sevc{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sevc button{border:2px solid transparent;border-radius:10px;padding:10px 0;font-family:inherit;font-weight:700;font-size:13px;color:#fff;cursor:pointer;opacity:.5}.sevc button.on{opacity:1;border-color:#fff}
+.sevc .s-critical{background:#b91c1c}.sevc .s-high{background:#ea580c}.sevc .s-medium{background:#ca8a04}.sevc .s-low{background:#15803d}
+.sumv{font-weight:700;font-size:16px}
+.cf{display:flex;gap:12px;align-items:flex-start;margin:14px 0;font-size:14px;text-transform:none;letter-spacing:0;color:var(--tx);cursor:pointer}
+.cf input{width:20px;height:20px;padding:0;margin:2px 0 0;-webkit-appearance:checkbox;appearance:auto;accent-color:var(--teal);flex:none}
+.offl{display:flex;gap:12px;align-items:center;background:var(--s1);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
+.offl svg{width:30px;height:30px;stroke:var(--teal);fill:none;stroke-width:1.7;flex:none}.offl small{display:block;color:var(--mut);font-size:12px}
+.ob{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,40px);opacity:0;pointer-events:none;z-index:50;transition:.3s;width:min(92vw,420px)}
+#toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.tk{display:flex;align-items:center;gap:14px;background:#12181c;border:1px solid rgba(0,194,180,.35);border-radius:18px;padding:16px 18px;box-shadow:0 24px 60px -10px #000}
+.tk svg{width:40px;height:40px;stroke:var(--teal);fill:none;stroke-width:1.8;flex:none}.tk>div{flex:1}
+.tk b{display:block;font-size:30px;color:var(--teal);letter-spacing:-.03em;line-height:1.1}.tk button{background:none;border:0;color:var(--mut);font-size:22px;cursor:pointer;align-self:flex-start}
+@media(max-width:1100px){.cgrid,.ugrid{grid-template-columns:1fr}}
+@media(max-width:760px){
+ .kts{grid-template-columns:repeat(2,1fr);gap:10px}.kt{padding:14px}.kh b{font-size:32px}.kh svg{width:28px;height:28px}
+ .ch{display:none}.cr{grid-template-columns:1fr auto;gap:8px}.tc{grid-column:1/-1;order:3}
+ #toast{bottom:calc(var(--sab) + 96px)}.phone{padding:14px;border-radius:24px;max-width:none}
+ .steps{gap:6px}.stepb{padding:10px 4px}.stepb b{font-size:20px}.stepb span{font-size:11.5px}
+ .pr{grid-template-columns:1fr;gap:6px}.iss{grid-template-columns:1fr 112px 34px}.seg.big button{padding:9px 12px;font-size:13px}
+}
 /* tabbar (phone) */
 .tabbar{display:none}
 /* iPad: icon rail */
@@ -149,43 +231,47 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 </div>
 <nav class="tabbar" id="tabbar"></nav>
 <script>
-const KEY='amphr_mvp_v1',DAY=864e5;
+const KEY='amphr_mvp_v2',DAY=864e5;
 const today=()=>new Date(new Date().toDateString()).getTime();
 const iso=t=>new Date(t).toISOString().slice(0,10);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function seed(){const t=today(),d=n=>iso(t+n*DAY);return{
+function seed(){const t=today(),d=n=>iso(t+n*DAY),at=(n,h,m)=>t+n*DAY+(h*60+m)*6e4;return{
 buildings:[
-{id:1,name:'Marina Heights Tower',area:'Dubai Marina',floors:42,year:2012,compliance:'compliant',lastInsp:d(-60),dueDate:d(300),issues:{critical:0,high:1,safety:0}},
-{id:2,name:'Deira Plaza',area:'Deira',floors:18,year:1998,compliance:'due',lastInsp:d(-210),dueDate:d(45),issues:{critical:1,high:2,safety:1}},
-{id:3,name:'Business Bay Offices',area:'Business Bay',floors:30,year:2016,compliance:'compliant',lastInsp:d(-20),dueDate:d(150),issues:{critical:0,high:0,safety:0}},
-{id:4,name:'Jumeirah Court',area:'Jumeirah',floors:12,year:2005,compliance:'non',lastInsp:d(-400),dueDate:d(-15),issues:{critical:2,high:3,safety:2}},
-{id:5,name:'Al Barsha Residences',area:'Al Barsha',floors:9,year:2009,compliance:'due',lastInsp:d(-120),dueDate:d(110),issues:{critical:0,high:2,safety:1}}],
+{id:1,name:'Heritage Tower',area:'Downtown Dubai',floors:40,year:1998,compliance:'non',lastInsp:d(-300),dueDate:d(-12),issues:{critical:3,high:2,safety:2}},
+{id:2,name:'Downtown Hub',area:'Downtown Dubai',floors:24,year:2004,compliance:'non',lastInsp:d(-330),dueDate:d(20),issues:{critical:2,high:1,safety:2}},
+{id:3,name:'Marina Plaza',area:'Dubai Marina',floors:18,year:2008,compliance:'non',lastInsp:d(-280),dueDate:d(38),issues:{critical:1,high:2,safety:1}},
+{id:4,name:'Tower One',area:'Business Bay',floors:30,year:2016,compliance:'compliant',lastInsp:d(-250),dueDate:d(210),issues:{critical:0,high:4,safety:1}},
+{id:5,name:'Tower Two',area:'Business Bay',floors:28,year:2017,compliance:'due',lastInsp:d(-120),dueDate:d(120),issues:{critical:1,high:3,safety:1}}],
 assets:[
-{id:1,b:1,name:'Passenger Lift A',type:'Lift',status:'Good'},{id:2,b:2,name:'Chiller 1',type:'HVAC',status:'Poor'},
-{id:3,b:2,name:'Fire Pump',type:'Fire safety',status:'Fair'},{id:4,b:4,name:'Roof Waterproofing',type:'Structure',status:'Critical'},
-{id:5,b:3,name:'Generator G1',type:'Electrical',status:'Good'}],
+{id:1,b:4,name:'Passenger Lift A',type:'Lift',status:'Good'},{id:2,b:2,name:'Chiller 1',type:'HVAC',status:'Poor'},
+{id:3,b:2,name:'Fire Pump',type:'Fire safety',status:'Fair'},{id:4,b:1,name:'Roof Waterproofing',type:'Structure',status:'Critical'},
+{id:5,b:5,name:'Generator G1',type:'Electrical',status:'Good'},{id:6,b:1,name:'Column C4',type:'Structure',status:'Critical'}],
 inspections:[
-{id:1,b:2,date:d(-210),by:'Demo Inspector',notes:'Spalling on level 3 slab; fire pump pressure low.'},
-{id:2,b:4,date:d(-400),by:'Demo Inspector',notes:'Roof membrane failure, water ingress.'}],
+{id:1,b:1,date:d(-300),by:'Ahmed Hassan',notes:'Structural inspection. Concrete spalling on Column C4; rebar corrosion at Level 12.'},
+{id:2,b:2,date:d(-330),by:'Demo Inspector',notes:'Fire pump pressure low; membrane failure at roof slab.'}],
 defects:[
-{id:241,b:2,level:3,zone:'A',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-6),x:430,y:200,health:46},
-{id:242,b:2,level:3,zone:'C',type:'Paint peeling \u2013 Wall',sev:'low',status:'Open',det:d(-12),x:800,y:190,health:88},
-{id:243,b:2,level:3,zone:'B',type:'Water ingress \u2013 Ceiling',sev:'medium',status:'In progress',det:d(-4),x:600,y:330,health:66},
-{id:244,b:2,level:3,zone:'A',type:'Hairline crack \u2013 Wall',sev:'low',status:'Open',det:d(-20),x:230,y:350,health:90},
-{id:245,b:2,level:3,zone:'C',type:'Efflorescence \u2013 Wall',sev:'medium',status:'Open',det:d(-2),x:810,y:470,health:64},
-{id:246,b:2,level:3,zone:'A',type:'Joint sealant failure',sev:'low',status:'Resolved',det:d(-30),x:210,y:560,health:86},
-{id:247,b:2,level:3,zone:'C',type:'Corroded rebar \u2013 Beam',sev:'high',status:'Open',det:d(-1),x:690,y:590,health:44},
-{id:248,b:2,level:3,zone:'B',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(0),x:520,y:470,health:28},
-{id:249,b:4,level:2,zone:'B',type:'Membrane failure \u2013 Roof slab',sev:'critical',status:'Open',det:d(-15),x:470,y:250,health:24},
-{id:250,b:4,level:2,zone:'C',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(-9),x:780,y:520,health:30},
-{id:251,b:4,level:2,zone:'A',type:'Cracking \u2013 Beam',sev:'high',status:'In progress',det:d(-5),x:240,y:330,health:48},
-{id:252,b:5,level:4,zone:'B',type:'Water ingress \u2013 Wall',sev:'medium',status:'Open',det:d(-8),x:560,y:560,health:62},
-{id:253,b:5,level:4,zone:'C',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-3),x:780,y:220,health:50},
-{id:254,b:1,level:12,zone:'A',type:'Sealant failure \u2013 Facade',sev:'high',status:'In progress',det:d(-7),x:300,y:210,health:52}],
+{id:241,b:1,level:3,zone:'A',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-6),x:430,y:200,health:46},
+{id:242,b:1,level:3,zone:'C',type:'Paint peeling \u2013 Wall',sev:'low',status:'Open',det:d(-12),x:800,y:190,health:88},
+{id:243,b:1,level:3,zone:'B',type:'Water ingress \u2013 Ceiling',sev:'medium',status:'In progress',det:d(-4),x:600,y:330,health:66},
+{id:244,b:1,level:3,zone:'A',type:'Hairline crack \u2013 Wall',sev:'low',status:'Open',det:d(-20),x:230,y:350,health:90},
+{id:245,b:1,level:3,zone:'C',type:'Efflorescence \u2013 Wall',sev:'medium',status:'Open',det:d(-2),x:810,y:470,health:64},
+{id:246,b:1,level:3,zone:'A',type:'Joint sealant failure',sev:'low',status:'Resolved',det:d(-30),x:210,y:560,health:86},
+{id:247,b:1,level:3,zone:'C',type:'Corroded rebar \u2013 Beam',sev:'high',status:'Open',det:d(-1),x:690,y:590,health:44},
+{id:248,b:1,level:3,zone:'B',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(0),x:520,y:470,health:28},
+{id:249,b:2,level:2,zone:'B',type:'Membrane failure \u2013 Roof slab',sev:'critical',status:'Open',det:d(-15),x:470,y:250,health:24},
+{id:250,b:2,level:2,zone:'C',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(-9),x:780,y:520,health:30},
+{id:251,b:2,level:2,zone:'A',type:'Cracking \u2013 Beam',sev:'high',status:'In progress',det:d(-5),x:240,y:330,health:48},
+{id:252,b:3,level:4,zone:'B',type:'Water ingress \u2013 Wall',sev:'medium',status:'Open',det:d(-8),x:560,y:560,health:62},
+{id:253,b:3,level:4,zone:'C',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-3),x:780,y:220,health:50},
+{id:254,b:4,level:12,zone:'A',type:'Sealant failure \u2013 Facade',sev:'high',status:'In progress',det:d(-7),x:300,y:210,health:52}],
+audit:[
+{t:at(0,9,42),a:'Deadline updated',b:2},{t:at(0,9,15),a:'Alert threshold set',b:3},{t:at(0,8,51),a:'Document uploaded',b:1},{t:at(-1,17,3),a:'Status changed',b:2},
+{t:at(-1,12,28),a:'Reminder sent',b:1},{t:at(-1,9,41),a:'Deadline updated',b:5},{t:at(-1,8,12),a:'Document uploaded',b:4},{t:at(-2,16,33),a:'Status changed',b:3}],
 did:255,
 nid:10}}
 let S;try{S=JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){S=seed()}
 if(!S.defects){const z=seed();S.defects=z.defects;S.did=z.did}
+if(!S.audit)S.audit=[];
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 // Health score v1 (per MVP spec)
 function health(b){
@@ -215,32 +301,41 @@ const IC={
  add:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
  plan:'<path d="M3 3h18v18H3zM3 10h8M11 3v18M11 15h10"/><circle cx="16" cy="6.5" r="1.4"/>'};
 const tabs=[['dash','Portfolio'],['plan','Floor plan'],['comp','Compliance'],['assets','Assets'],['insp','Inspect']];
-let tab='dash',sel=null,flt=-1,q='';
+let tab='dash',sel=null,flt='all',q='';
 function nav(){
  document.getElementById('nav').innerHTML=tabs.map(([k,l])=>`<button class="nv ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')" aria-label="${l}"><svg viewBox="0 0 24 24">${IC[k]}</svg><span>${l}</span></button>`).join('');
  document.getElementById('tabbar').innerHTML=tabs.map(([k,l])=>`<button class="tb ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')"><svg viewBox="0 0 24 24">${IC[k]}</svg>${l}</button>`).join('')}
 function go(k,id){tab=k;sel=id??null;render()}
 function render(){nav();document.getElementById('v').innerHTML=({dash,comp,assets,insp,add,detail,plan:planPage})[tab]();if(tab==='plan')planDraw();window.scrollTo(0,0)}
 const head=(t,s,r='')=>`<div class="top"><div><h1>${t}</h1><div class="sub">${s}</div></div>${r}</div>`;
+const IC2={bld:'<path d="M4 21V4h10v17M14 9h6v12M8 8h2M8 12h2M8 16h2M2 21h20"/>',heart:'<path d="M12 20s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9z"/>',warn:'<path d="M12 3 2 20h20zM12 10v5M12 18v.01"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
+const FL=[['all','All'],['critical','Critical'],['due','Due soon'],['compliant','Compliant']];
+const fpred=(k,b,h)=>k==='all'||(k==='critical'&&h.score<40)||(k==='due'&&dleft(b)<=90)||(k==='compliant'&&b.compliance==='compliant');
+const stp=s=>`<span class="stp b${BANDS[bi(s)][1]}">${BANDS[bi(s)][0].toUpperCase()}</span>`;
+const kpi=(ic,n,l,s,c)=>`<div class="kt"><div class="kh" style="color:${c}"><svg viewBox="0 0 24 24">${IC2[ic]}</svg><b>${n}</b></div><div class="kl">${l}</div><div class="ks">${s}</div></div>`;
+let vm=innerWidth<=760?'list':'cards';
+const soft=()=>{const y=scrollY;render();scrollTo(0,y)};
+function plist(){
+ const all=S.buildings.map(b=>({b,h:health(b)})).filter(x=>fpred(flt,x.b,x.h)&&x.b.name.toLowerCase().includes(q.toLowerCase())).sort((a,c)=>a.h.score-c.h.score);
+ if(vm==='list')return `<div class="card"><div class="lh"><span>Building</span><span>Health</span><span>Status</span></div>${all.map(({b,h})=>`<div class="lr" onclick="go('detail',${b.id})"><b>${esc(b.name)}</b><span class="hs" style="color:${col(h.score)}">${h.score}%</span>${stp(h.score)}</div>`).join('')||'<div class="empty">No buildings match.</div>'}</div>`;
+ return `<div class="grid g3">${cards(all)}</div>`}
 function dash(){
  const all=S.buildings.map(b=>({b,h:health(b)}));
  const avg=all.length?Math.round(all.reduce((a,x)=>a+x.h.score,0)/all.length):0;
  const cnt=[0,0,0,0];all.forEach(x=>cnt[bi(x.h.score)]++);
- const ovd=S.buildings.filter(b=>dleft(b)<0).length,soon=S.buildings.filter(b=>{const n=dleft(b);return n>=0&&n<90}).length;
- const list=all.filter(x=>(flt<0||bi(x.h.score)===flt)&&x.b.name.toLowerCase().includes(q.toLowerCase())).sort((a,c)=>a.h.score-c.h.score);
- return head('Portfolio',new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),`<button class="btn pri" onclick="go('add')">+ Add building</button>`)+
- `<div class="card glow hero">${ring(avg,168,14,'Portfolio')}
-  <div><h3 style="margin-bottom:2px">Average health ${pill(avg)}</h3><div class="sub">Across ${all.length} building${all.length==1?'':'s'}</div>
+ const crit=S.defects.filter(d=>d.sev==='critical'&&d.status!=='Resolved').length,soon=S.buildings.filter(b=>dleft(b)<=90).length;
+ return head('Portfolio Overview',new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),`<button class="btn pri" onclick="go('add')">+ Add building</button>`)+
+ `<div class="kts">${kpi('bld',all.length,'Buildings','Total in portfolio','var(--teal)')}${kpi('heart',avg+'%','Average health','Portfolio average','var(--teal)')}${kpi('warn',crit,'Critical issues','Require attention','var(--or)')}${kpi('clock',soon,'Due soon','Actions due soon','var(--or)')}</div>
+ <div class="card glow hero">${ring(avg,150,13,'Portfolio')}<div><h3 style="margin-bottom:2px">Portfolio health ${pill(avg)}</h3><div class="sub">Across ${all.length} building${all.length==1?'':'s'}</div>
   <div class="dist">${cnt.map((n,i)=>n?`<i style="flex:${n};background:${BANDS[i][2]}"></i>`:'').join('')}</div>
-  <div class="legend">${BANDS.map((b,i)=>`<span><s style="background:${b[2]}"></s>${b[0]} ${cnt[i]}</span>`).join('')}</div>
-  <div class="kpis" style="margin-top:18px"><div class="kpi"><b>${all.length}</b><span>Buildings</span></div><div class="kpi"><b style="color:var(--r)">${ovd}</b><span>Overdue</span></div><div class="kpi"><b style="color:var(--o)">${soon}</b><span>Due in 90 days</span></div></div></div></div>
-  <div class="tools"><input class="search" placeholder="Search buildings" value="${esc(q)}" oninput="q=this.value;fl()" id="sq">
-  <div class="chips">${[['All',-1],...BANDS.map((b,i)=>[b[0],i])].map(([l,i])=>`<button class="chip ${flt===i?'on':''}" onclick="flt=${i};render()">${l}</button>`).join('')}</div></div>
-  <div class="grid g3" id="bl">${cards(list)}</div>`}
+  <div class="legend">${BANDS.map((b,i)=>`<span><s style="background:${b[2]}"></s>${b[0]} ${cnt[i]}</span>`).join('')}</div></div></div>
+ <div class="tools"><input class="search" placeholder="Search buildings" value="${esc(q)}" oninput="q=this.value;fl()" id="sq">
+  <div class="chips">${FL.map(([k,l])=>`<button class="chip ${flt===k?'on':''}" onclick="flt='${k}';render()">${l}</button>`).join('')}</div>
+  <div class="seg"><button class="${vm==='cards'?'on':''}" onclick="vm='cards';render()">Cards</button><button class="${vm==='list'?'on':''}" onclick="vm='list';render()">List</button></div></div>
+ <div id="bl">${plist()}</div>`}
 function cards(list){return list.map(({b,h})=>`<div class="card bc" onclick="go('detail',${b.id})"><div class="h">${ring(h.score,72,7)}<div><h4>${esc(b.name)}</h4><p>${esc(b.area)} · ${b.floors} floors</p></div></div>
  <div class="meta"><span>${pill(h.score)}</span><span>${dleft(b)<0?Math.abs(dleft(b))+' days overdue':dleft(b)+' days to inspection'}</span></div></div>`).join('')||'<div class="empty card" style="grid-column:1/-1">No buildings match.</div>'}
-function fl(){const all=S.buildings.map(b=>({b,h:health(b)}));
- document.getElementById('bl').innerHTML=cards(all.filter(x=>(flt<0||bi(x.h.score)===flt)&&x.b.name.toLowerCase().includes(q.toLowerCase())).sort((a,c)=>a.h.score-c.h.score))}
+function fl(){document.getElementById('bl').innerHTML=plist()}
 function detail(){
  const b=S.buildings.find(x=>x.id===sel);if(!b)return dash();const h=health(b),n=dleft(b);
  const parts=[['Structural · 40%',h.st],['Compliance · 30%',h.co],['Maintenance · 20%',h.mt],['Safety · 10%',h.sf]];
@@ -253,13 +348,36 @@ function detail(){
  <div class="f3" style="margin-top:14px"><div class="kpi"><b style="color:var(--r)">${b.issues.critical}</b><span>Critical</span></div><div class="kpi"><b style="color:var(--o)">${b.issues.high}</b><span>High</span></div><div class="kpi"><b style="color:var(--y)">${b.issues.safety}</b><span>Safety</span></div></div></div></div>
  <div class="grid g2"><div class="card"><h3>Assets · ${as.length}</h3><div class="list">${as.map(a=>`<div class="li"><div><b>${esc(a.name)}</b><small>${esc(a.type)}</small></div>${sp(a.status)}</div>`).join('')||'<div class="empty">No assets yet.</div>'}</div></div>
  <div class="card"><h3>Inspections · ${ins.length}</h3><div class="list">${ins.map(i=>`<div class="li"><div><b>${i.date}</b><small>${esc(i.by)} — ${esc(i.notes)}</small></div></div>`).join('')||'<div class="empty">None recorded.</div>'}</div></div></div>
- <div class="actions"><button class="btn pri" onclick="go('insp','${b.id}')">Record inspection</button><button class="btn danger" onclick="delB(${b.id})">Delete building</button></div>`}
+ <div class="actions"><button class="btn pri" onclick="it='manual';go('insp','${b.id}')">Record inspection</button><button class="btn danger" onclick="delB(${b.id})">Delete building</button></div>`}
 const sp=s=>{const m={Good:'G',Fair:'Y',Poor:'O',Critical:'R'}[s]||'G';return `<span class="pill p${m}">${esc(s)}</span>`};
+let cSel=null;
+const AL=[[30,'30D','#fbbf24'],[14,'14D','#fb923c'],[1,'1D','#f87171']];
+const dots=n=>AL.map(([t,l,c])=>`<i class="dot" style="background:${n<=t?c:'var(--g)'}" title="${l}: ${n<=t?'alert active':'clear'}"></i>`).join('');
+const track=n=>{const pos=Math.min(100,Math.max(0,(1-n/365)*100));return `<div class="trk"><div class="bars"><i style="flex:50.7;background:#1f9d55"></i><i style="flex:24.6;background:#e0a800"></i><i style="flex:24.7;background:#c0392b"></i></div><u class="${n<0?'od':''}" style="left:${pos}%"></u></div>`};
 function comp(){
- const bs=[...S.buildings].sort((a,c)=>dleft(a)-dleft(c));
- return head('Compliance','Law 3/2026 inspection tracker · green over 180 days, yellow 90–180, red under 90')+
- `<div class="card"><div class="list">${bs.map(b=>{const n=dleft(b);return `<div class="li" style="cursor:pointer" onclick="go('detail',${b.id})"><div><b>${esc(b.name)}</b><small>${CS[b.compliance]} · due ${b.dueDate}${[30,14,1].includes(n)?' · ⚠ alert':''}</small></div><div class="cd ${ucls(n)}"><b>${Math.abs(n)}</b><small>${n<0?'overdue':'days'}</small></div></div>`}).join('')||'<div class="empty">No buildings.</div>'}</div></div>
- <p class="sub" style="margin-top:12px">Alerts at 30, 14 and 1 day are in-app only in this demo.</p>`}
+ const bs=[...S.buildings].sort((a,c)=>dleft(a)-dleft(c)),sb=S.buildings.find(b=>b.id===cSel);
+ return head('Law 3/2026 Compliance Tracker','Deadlines colour-coded by urgency · alerts at 30, 14 and 1 day')+
+ `<div class="cgrid"><div><div class="card"><h3 class="up">Compliance timeline</h3>
+  <div class="ch"><span>Building</span><span>Time to deadline<span class="lg"><s style="color:var(--g)">&gt;180 days</s><s style="color:var(--y)">90–180 days</s><s style="color:var(--r)">&lt;90 days</s></span></span><span class="al">Alerts<br><small>30D 14D 1D</small></span></div>
+  ${bs.map(b=>{const n=dleft(b);return `<div class="cr ${b.id===cSel?'on':''}" onclick="cSel=${b.id};soft()"><b>${esc(b.name)}</b><div class="tc">${track(n)}<small>${n<0?Math.abs(n)+' days overdue':n+' days left'} · ${b.dueDate} · ${CS[b.compliance]}</small></div><div class="dots">${dots(n)}</div></div>`}).join('')||'<div class="empty">No buildings.</div>'}
+  <button class="btn pri wide" onclick="genReport()">Generate DM compliance report</button></div>
+  ${sb?`<div class="card" style="margin-top:16px"><h3>Update ${esc(sb.name)}</h3><form onsubmit="saveDeadline(event)"><div class="f2"><div><label style="margin-top:0">Deadline</label><input type="date" name="due" value="${sb.dueDate}" required></div>
+  <div><label style="margin-top:0">Status</label><select name="co">${Object.entries(CS).map(([k,v])=>`<option value="${k}" ${sb.compliance===k?'selected':''}>${v}</option>`).join('')}</select></div></div>
+  <div class="actions"><button class="btn pri">Save changes</button><button type="button" class="btn" onclick="remind(${sb.id})">Send reminder</button></div></form></div>`:'<p class="sub" style="margin-top:12px">Tap a building to update its deadline or status.</p>'}</div>
+  <div class="card"><h3 class="up">Audit trail</h3><div class="ah"><span>Action</span><span>Time</span></div>${S.audit.slice(0,10).map(a=>`<div class="ar"><span>${esc(a.a)}${a.b?`<small>${esc((S.buildings.find(x=>x.id===a.b)||{}).name||'')}</small>`:''}</span><span class="at">${fmtT(a.t)}</span></div>`).join('')||'<div class="empty">No activity yet.</div>'}</div></div>`}
+function saveDeadline(e){const f=fd(e),b=S.buildings.find(x=>x.id===cSel);if(!b)return;
+ if(f.due!==b.dueDate){b.dueDate=f.due;audit('Deadline updated',b.id)}
+ if(f.co!==b.compliance){b.compliance=f.co;audit('Status changed',b.id)}
+ save();toast('Saved',null);soft()}
+function remind(id){audit('Reminder sent',id);toast('Reminder logged (demo: no message is sent)',null);soft()}
+function genReport(){
+ const rows=[...S.buildings].sort((a,c)=>dleft(a)-dleft(c)).map(b=>{const h=health(b),n=dleft(b),cr=S.defects.filter(d=>d.b===b.id&&d.sev==='critical'&&d.status!=='Resolved').length;
+  return `<tr><td>${esc(b.name)}<br><small>${esc(b.area)}</small></td><td>${h.score}% ${BANDS[bi(h.score)][0]}</td><td>${CS[b.compliance]}</td><td>${b.lastInsp}</td><td>${b.dueDate}</td><td>${n<0?Math.abs(n)+' overdue':n}</td><td>${cr}</td></tr>`}).join('');
+ const au=S.audit.slice(0,12).map(a=>`<tr><td>${esc(a.a)}</td><td>${esc((S.buildings.find(x=>x.id===a.b)||{}).name||'')}</td><td>${fmtT(a.t)}</td></tr>`).join('');
+ const html=`<!doctype html><meta charset="utf-8"><title>Law 3/2026 Compliance Report</title><style>body{font:14px/1.5 system-ui,sans-serif;margin:40px;color:#111}h1{margin:0 0 4px}table{width:100%;border-collapse:collapse;margin:14px 0 26px}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#eef4f4}small{color:#666}.note{color:#8a5200;border:1px solid #f0c27b;background:#fff6e5;padding:10px;border-radius:6px}@media print{.np{display:none}}</style><h1>Law 3/2026 Compliance Report</h1><p>Prepared for Dubai Municipality · Generated ${new Date().toLocaleString('en-GB')} · AMPHR</p><p class="note">Demo output generated from sample data held in this browser. It is not an official Dubai Municipality submission.</p><h2>Buildings</h2><table><tr><th>Building</th><th>Health</th><th>Compliance</th><th>Last inspection</th><th>Deadline</th><th>Days</th><th>Open critical defects</th></tr>${rows}</table><h2>Audit trail</h2><table><tr><th>Action</th><th>Building</th><th>Time</th></tr>${au}</table><button class="np" onclick="print()">Print / Save as PDF</button>`;
+ const url=URL.createObjectURL(new Blob([html],{type:'text/html'}));audit('Report generated');
+ const w=window.open(url,'_blank');if(!w){const l=document.createElement('a');l.href=url;l.download='Compliance_Report_'+iso(today())+'.html';l.click()}
+ toast('DM compliance report generated',null);soft()}
 function assets(){
  return head('Assets',`${S.assets.length} registered`,`<div class="actions" style="margin:0"><button class="btn pri" onclick="exp()">Export CSV</button><label class="btn" style="margin:0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--tx)">Import CSV<input type="file" accept=".csv" style="display:none" onchange="imp(this.files[0])"></label></div>`)+
  `<div class="grid g2"><div class="card"><div class="list">${S.assets.map(a=>`<div class="li"><div><b>${esc(a.name)}</b><small>${esc((S.buildings.find(b=>b.id===a.b)||{}).name||'#'+a.b)} · ${esc(a.type)}</small></div>${sp(a.status)}</div>`).join('')||'<div class="empty">No assets.</div>'}</div>
@@ -267,8 +385,8 @@ function assets(){
  <div class="card"><h3>Add asset</h3><form onsubmit="addA(event)"><label style="margin-top:0">Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select>
  <label>Name</label><input name="name" required><div class="f2"><div><label>Type</label><input name="type" required></div><div><label>Status</label><select name="status"><option>Good</option><option>Fair</option><option>Poor</option><option>Critical</option></select></div></div>
  <div class="actions"><button class="btn pri">Add asset</button></div></form></div></div>`}
-function insp(){
- return head('Inspect','Record a manual inspection · updates the building health score')+
+function man(){
+ return ''+
  `<div class="grid g2"><div class="card"><form onsubmit="addI(event)">
  <label style="margin-top:0">Building</label><select name="b">${S.buildings.map(b=>`<option value="${b.id}" ${String(b.id)===String(sel)?'selected':''}>${esc(b.name)}</option>`).join('')}</select>
  <div class="f2"><div><label>Inspector</label><input name="by" required></div><div><label>Date</label><input type="date" name="date" value="${iso(today())}" required></div></div>
@@ -290,7 +408,7 @@ function addB(e){const f=fd(e);S.buildings.push({id:S.nid++,name:f.name,area:f.a
 function delB(id){if(!confirm('Delete this building and its records?'))return;S.buildings=S.buildings.filter(b=>b.id!==id);S.assets=S.assets.filter(a=>a.b!==id);S.inspections=S.inspections.filter(i=>i.b!==id);save();go('dash')}
 function addI(e){const f=fd(e),b=S.buildings.find(x=>x.id===+f.b);if(!b)return;
  S.inspections.push({id:S.nid++,b:b.id,date:f.date,by:f.by,notes:f.notes});
- b.lastInsp=f.date;b.dueDate=f.due;b.compliance=f.compliance;b.issues={critical:+f.critical,high:+f.high,safety:+f.safety};save();go('detail',b.id)}
+ b.lastInsp=f.date;b.dueDate=f.due;b.compliance=f.compliance;b.issues={critical:+f.critical,high:+f.high,safety:+f.safety};audit('Document uploaded',b.id);save();go('detail',b.id)}
 function addA(e){const f=fd(e);S.assets.push({id:S.nid++,b:+f.b,name:f.name,type:f.type,status:f.status});save();render()}
 function exp(){const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
  const csv='building_id,name,type,status\n'+S.assets.map(a=>[a.b,q(a.name),q(a.type),a.status].join(',')).join('\n');
@@ -390,5 +508,145 @@ function saveDefect(e){const f=fd(e);S.defects.push({id:S.did++,b:pb,level:plv,z
  selD=S.defects[S.defects.length-1].id;draft=null;save();planDraw()}
 function setStatus(id,v){const d=S.defects.find(x=>x.id===id);if(d){d.status=v;save();planDraw()}}
 function delD(id){if(!confirm('Delete this defect?'))return;S.defects=S.defects.filter(d=>d.id!==id);selD=null;save();planDraw()}
+// ---- audit, toast, inspections
+const fmtT=ms=>{const d=new Date(ms),n=Math.round((today()-new Date(d.toDateString()).getTime())/DAY);return(n<=0?'Today':n===1?'Yesterday':n+' days ago')+', '+d.toTimeString().slice(0,5)};
+function audit(a,b){S.audit.unshift({t:Date.now(),a,b});S.audit=S.audit.slice(0,60);save()}
+let toastT;
+function toast(msg,big,ok=true){let el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.setAttribute('role','status');document.body.appendChild(el)}
+ el.innerHTML=`<div class="tk">${ok?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>':''}<div><div>${msg}</div>${big?`<b>${big}</b>`:''}</div><button aria-label="Close" onclick="document.getElementById('toast').classList.remove('on')">×</button></div>`;
+ el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),6000)}
+function applyInspection(b,o){const before=health(b).score,oldCo=b.compliance;
+ S.inspections.push({id:S.nid++,b:b.id,date:o.date,by:o.by,notes:o.notes});
+ b.lastInsp=o.date;b.dueDate=o.due;b.issues={critical:o.crit,high:o.high,safety:o.safety===undefined?b.issues.safety:o.safety};
+ if(o.crit===0)b.compliance='compliant';
+ audit('Document uploaded',b.id);if(oldCo!==b.compliance)audit('Status changed',b.id);
+ save();return [before,health(b).score]}
+let it='upload';
+function insp(){
+ return head('Inspect','PDFs in. Insights out.')+`<div class="seg big">${[['upload','Upload PDF'],['check','Field checklist'],['manual','Manual entry']].map(([k,l])=>`<button class="${it===k?'on':''}" onclick="it='${k}';render()">${l}</button>`).join('')}</div>`+({upload:upl,check:chk,manual:man})[it]()}
+// ---- upload inspection (PDF)
+let up=null,upBusy=false;
+const blankUp=n=>({name:n||'',date:iso(today()),by:'',title:'',issues:[],b:(S.buildings[0]||{}).id,due:iso(today()+365*DAY),warn:''});
+const sevOpts=v=>['critical','high','medium','low'].map(s=>`<option value="${s}" ${v===s?'selected':''}>${s[0].toUpperCase()+s.slice(1)}</option>`).join('');
+function upl(){const u=up;
+ return `<div class="ugrid"><div>
+  <div class="drop" tabindex="0" role="button" aria-label="Upload inspection PDF" ondragover="event.preventDefault();this.classList.add('hv')" ondragleave="this.classList.remove('hv')" ondrop="event.preventDefault();readPdf(event.dataTransfer.files[0])" onclick="document.getElementById('pdfin').click()" onkeydown="if(event.key==='Enter')document.getElementById('pdfin').click()">
+   <svg class="pdfic" viewBox="0 0 64 64"><path d="M16 6h22l14 14v38H16z"/><path d="M38 6v14h14"/><text x="21" y="46" font-size="14" font-weight="700" stroke="none" style="fill:var(--teal)">PDF</text></svg>
+   <b>${upBusy?'Reading PDF…':u?esc(u.name):'Drag and drop PDF here'}</b><span>${u?'Drop another file to replace it':'or click to browse'}</span>
+   <input id="pdfin" type="file" accept="application/pdf" hidden onchange="readPdf(this.files[0])" onclick="event.stopPropagation()"></div>
+  <button class="btn wide" onclick="sampleReport()">Use sample report</button>
+  <p class="sub" style="margin-top:12px">The PDF is read in your browser. Nothing is uploaded to a server.</p></div>
+  <div><div class="card"><h3>Parsed Information</h3>${u?`${u.warn?`<div class="warn">${esc(u.warn)}</div>`:''}
+   <div class="pr"><label>Inspection Date</label><input type="date" value="${u.date}" onchange="up.date=this.value"></div>
+   <div class="pr"><label>Inspector Name</label><input value="${esc(u.by)}" oninput="up.by=this.value" placeholder="Inspector name"></div>
+   <div class="pr"><label>Report Title</label><input value="${esc(u.title)}" oninput="up.title=this.value"></div>
+   <div class="pr"><label>Building</label><select onchange="up.b=+this.value">${S.buildings.map(b=>`<option value="${b.id}" ${b.id===u.b?'selected':''}>${esc(b.name)}</option>`).join('')}</select></div>
+   <div class="pr"><label>Next Due</label><input type="date" value="${u.due}" onchange="up.due=this.value"></div>`:'<div class="empty">Upload a PDF or use the sample report to see parsed details.</div>'}</div>
+  <div class="card" style="margin-top:16px"><h3>Detected Issues</h3>${u?`${u.issues.map((x,i)=>`<div class="iss"><input value="${esc(x.t)}" oninput="up.issues[${i}].t=this.value" aria-label="Issue"><select class="sevsel s-${x.sev}" onchange="up.issues[${i}].sev=this.value;soft()" aria-label="Severity">${sevOpts(x.sev)}</select><button class="xb" onclick="up.issues.splice(${i},1);soft()" aria-label="Remove issue">×</button></div>`).join('')||'<div class="empty">No issues yet.</div>'}<button class="btn" style="margin-top:12px" onclick="up.issues.push({t:'',sev:'medium'});soft()">+ Add issue</button>`:'<div class="empty">Issues found in the report appear here.</div>'}</div>
+  <button class="btn pri wide" ${u?'':'disabled'} onclick="confirmUpload()">Confirm &amp; Update</button></div></div>`}
+function sampleReport(){up={name:'Heritage_Tower_Structural_Inspection.pdf (sample)',date:iso(today()),by:'Ahmed Hassan',title:'Heritage Tower – Structural Inspection',issues:[{t:'Concrete spalling on Column C4',sev:'critical'},{t:'Corrosion on rebar – Level 12',sev:'high'}],b:(S.buildings.find(b=>b.name==='Heritage Tower')||S.buildings[0]||{}).id,due:iso(today()+365*DAY),warn:''};soft()}
+async function loadPdfJs(){if(window.pdfjsLib)return window.pdfjsLib;
+ await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=res;s.onerror=()=>rej(new Error('PDF reader could not load. Check your connection'));document.head.appendChild(s)});
+ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';return pdfjsLib}
+async function readPdf(f){if(!f)return;
+ if(!/pdf$/i.test(f.name)&&f.type!=='application/pdf'){toast('Please choose a PDF file.',null,false);return}
+ upBusy=true;soft();
+ try{const lib=await loadPdfJs(),doc=await lib.getDocument({data:await f.arrayBuffer()}).promise,lines=[];
+  for(let p=1;p<=Math.min(doc.numPages,30);p++){const pg=await doc.getPage(p),tc=await pg.getTextContent(),rows={};
+   tc.items.forEach(i=>{const y=Math.round(i.transform[5]/3);(rows[y]=rows[y]||[]).push([i.transform[4],i.str])});
+   Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(y=>lines.push(rows[y].sort((a,b)=>a[0]-b[0]).map(r=>r[1]).join(' ').replace(/\s+/g,' ').trim()))}
+  const ls=lines.filter(Boolean);up=ls.length?parseReport(ls,f.name):Object.assign(blankUp(f.name),{warn:'No readable text found (scanned PDF?). Enter the details manually.'})}
+ catch(e){up=Object.assign(blankUp(f.name),{warn:'Could not read this PDF ('+e.message+'). Enter the details manually.'})}
+ upBusy=false;soft()}
+const MON='jan feb mar apr may jun jul aug sep oct nov dec'.split(' ');
+function pdate(s){let m,y,mo,d;
+ if(m=s.match(/\b(\d{4})-(\d{2})-(\d{2})\b/)){y=+m[1];mo=+m[2];d=+m[3]}
+ else if(m=s.match(/\b(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})\b/)){d=+m[1];mo=+m[2];y=+m[3]}
+ else if(m=s.match(/\b(\d{1,2})(?:st|nd|rd|th)?[\s\-]+([A-Za-z]{3,9})\.?,?[\s\-]+(\d{4})\b/)){d=+m[1];mo=MON.indexOf(m[2].slice(0,3).toLowerCase())+1;y=+m[3]}
+ else if(m=s.match(/\b([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b/)){mo=MON.indexOf(m[1].slice(0,3).toLowerCase())+1;d=+m[2];y=+m[3]}
+ else return '';
+ if(!(mo>=1&&mo<=12&&d>=1&&d<=31&&y>=1990&&y<=2100))return '';
+ return `${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function parseReport(lines,name){
+ const low=lines.join('\n').toLowerCase(),u=blankUp(name);
+ const dl=lines.find(l=>/date/i.test(l)&&pdate(l));u.date=pdate(dl||'')||pdate(lines.join('\n'))||u.date;
+ const il=lines.map(l=>l.match(/(?:inspector|inspected by|prepared by|engineer)(?:\s*name)?\s*[:\-–]\s*(.+)/i)).find(Boolean);u.by=il?il[1].trim().slice(0,60):'';
+ u.title=(lines.find(l=>/inspection|report|survey|assessment/i.test(l)&&l.length<100&&!/^\s*(date|inspector|prepared)/i.test(l))||lines[0]||name).slice(0,100);
+ const bm=S.buildings.find(b=>low.includes(b.name.toLowerCase()));if(bm)u.b=bm.id;
+ const KEY=/crack|spall|corros|rebar|leak|seep|ingress|damp|moisture|settle|deform|honeycomb|delaminat|efflorescence|exposed|rust|sprinkler|short circuit|guardrail|egress|deteriorat|defect|damage/i,seen=new Set();
+ lines.forEach(l=>{const t=l.replace(/^[\s•\-\*\d\.\)]+/,'').trim();
+  if(t.length<8||t.length>140||t===u.title||/^(date|inspector|prepared|report)/i.test(t)||!KEY.test(t))return;
+  const k=t.toLowerCase();if(seen.has(k)||u.issues.length>=12)return;seen.add(k);
+  const sev=/critical|severe|urgent|immediate|collapse|unsafe|dangerous/i.test(t)?'critical':/minor|hairline|cosmetic|paint|peeling|stain/i.test(t)?'low':/spall|corros|rebar|settle|deform|major|significant|leak|delaminat|exposed/i.test(t)?'high':'medium';
+  u.issues.push({t,sev})});
+ if(!u.issues.length)u.warn='No issues were detected automatically. Add them below.';
+ if(!u.by)u.warn=(u.warn?u.warn+' ':'')+'Inspector name not found. Please enter it.';
+ return u}
+function confirmUpload(){const u=up;if(!u)return;const b=S.buildings.find(x=>x.id===u.b);
+ if(!b||!u.date||!u.by.trim()){toast('Add the inspection date, inspector name and building first.',null,false);return}
+ const is=u.issues.filter(i=>i.t.trim()),c=s=>is.filter(i=>i.sev===s).length;
+ const [a,z]=applyInspection(b,{date:u.date,by:u.by.trim(),notes:(u.title||'Uploaded report')+': '+(is.map(i=>i.t+' ('+i.sev+')').join('; ')||'no issues listed')+'.',crit:c('critical'),high:c('high'),due:u.due});
+ up=null;toast('Building health updated',`${a}% to ${z}%`);soft()}
+// ---- inspector checklist & annotation
+const CK=[['Foundation & Structural',['Cracks in walls','Spalling concrete','Settlement','Structural deformation']],['MEP Systems',['Electrical systems','Plumbing systems','HVAC systems','Fire protection']],['Safety & Access',['Access & egress','Guardrails & barriers','Signage & lighting']]];
+const CAMIC='<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>';
+let ck=null;
+function ckInit(){let by='';try{by=localStorage.getItem('amphr_insp')||''}catch(e){}
+ ck={b:(S.buildings[0]||{}).id,done:{},finds:[],step:1,cur:null,confirm:false,by,due:iso(today()+365*DAY)}}
+const pendingSync=()=>S.inspections.filter(i=>i.synced===false).length;
+function chk(){if(!ck)ckInit();
+ if(!S.buildings.length)return '<div class="card empty">Add a building first.</div>';
+ const steps=[['01','Inspection Checklist'],['02','Annotate & Assess'],['03','Review & Submit']];
+ return `<div class="steps">${steps.map(([n,l],i)=>`<button class="stepb ${ck.step===i+1?'on':''}" onclick="ckGo(${i+1})"><b>${n}</b><span>${l}</span></button>`).join('')}</div><div class="phone">${[0,ck1,ck2,ck3][ck.step]()}</div>`}
+function ckGo(s){if(s===2&&!ck.cur){toast('Tap the camera button next to a checklist item to log a finding.',null,false);return}ck.step=s;soft()}
+function ck1(){const total=CK.reduce((a,c)=>a+c[1].length,0),dn=Object.values(ck.done).filter(Boolean).length;
+ return `<div class="ph-h"><b>Inspection Checklist</b><span class="sub" style="margin:0">${dn}/${total} checked</span></div>
+ <label style="margin-top:0">Building</label><select onchange="ck.b=+this.value">${S.buildings.map(b=>`<option value="${b.id}" ${b.id===ck.b?'selected':''}>${esc(b.name)}</option>`).join('')}</select><div style="height:14px"></div>
+ ${CK.map(([cat,items],ci)=>{const n=items.filter((_,ii)=>ck.done[ci+'-'+ii]).length;
+  return `<div class="ckc"><div class="ckt"><span>${cat}</span><i>${n}/${items.length}</i></div>${items.map((l,ii)=>{const k=ci+'-'+ii,fc=ck.finds.filter(f=>f.key===k).length;
+   return `<div class="cki"><label class="cf" style="margin:0;flex:1;align-items:center;gap:12px"><input type="checkbox" style="display:none" ${ck.done[k]?'checked':''} onchange="ck.done['${k}']=this.checked;soft()"><span class="bx" style="display:grid"></span><span class="t">${l}</span></label><button class="cam" aria-label="Log finding for ${l}" onclick="openFind('${k}')"><svg viewBox="0 0 24 24">${CAMIC}</svg>${fc?`<em>${fc}</em>`:''}</button></div>`}).join('')}</div>`}).join('')}
+ <button class="btn pri wide" onclick="ckGo(3)">Review &amp; Submit</button>`}
+function openFind(k){const [ci,ii]=k.split('-').map(Number);ck.cur={id:Date.now(),key:k,cat:CK[ci][0],label:CK[ci][1][ii],photo:'',pt:null,tag:'',sev:'medium',notes:'',isNew:true};ck.step=2;soft()}
+function editFind(id){ck.cur=ck.finds.find(f=>f.id===id);ck.step=2;soft()}
+function ck2(){const f=ck.cur;if(!f){ck.step=1;return ck1()}
+ return `<div class="ph-h"><button class="xb" onclick="ck.cur=null;ck.step=1;soft()" aria-label="Back">‹</button><b>Annotate Finding</b><button class="xb" onclick="delFind()" aria-label="Delete finding" style="width:auto;padding:0 10px;font-size:13px">Delete</button></div>
+ <div class="sub" style="margin:0 0 10px">${esc(f.cat)} · ${esc(f.label)}</div>
+ <div class="photo" onclick="annTap(event)">${f.photo?`<img src="${f.photo}" alt="Finding photo" draggable="false">`:`<div class="ph"><svg viewBox="0 0 24 24" width="44" height="44" style="stroke:currentColor;fill:none;stroke-width:1.5">${CAMIC}</svg><div>Tap to add a photo</div></div>`}${f.photo&&f.pt?`<svg class="pt" style="left:${f.pt.x}%;top:${f.pt.y}%" viewBox="0 0 24 24"><path d="M4 4 20 10l-7 3-3 7z" fill="currentColor"/></svg><span class="tag" id="tagel" style="left:${f.pt.x}%;top:${f.pt.y}%;${f.tag?'':'display:none'}">${esc(f.tag)}</span>`:''}</div>
+ <div class="actions" style="margin-top:12px"><button class="btn" style="flex:1" onclick="document.getElementById('cam').click()">${f.photo?'Retake Photo':'Take Photo'}</button><button class="btn" style="flex:1" onclick="document.getElementById('gal').click()">Gallery</button></div>
+ <input id="cam" type="file" accept="image/*" capture="environment" hidden onchange="addPhoto(this.files[0])"><input id="gal" type="file" accept="image/*" hidden onchange="addPhoto(this.files[0])">
+ <label>Callout label · tap the photo to place it</label><input value="${esc(f.tag)}" placeholder="e.g. 2cm wide" oninput="ck.cur.tag=this.value;tagLive()">
+ <label>Severity</label><div class="sevc">${['critical','high','medium','low'].map(s=>`<button class="s-${s} ${f.sev===s?'on':''}" onclick="ck.cur.sev='${s}';soft()">${s[0].toUpperCase()+s.slice(1)}</button>`).join('')}</div>
+ <label>Notes (optional)</label><textarea rows="3" oninput="ck.cur.notes=this.value">${esc(f.notes)}</textarea>
+ <button class="btn pri wide" onclick="saveFind()">Save finding</button>`}
+function tagLive(){const e=document.getElementById('tagel');if(e){e.textContent=ck.cur.tag;e.style.display=ck.cur.tag?'':'none'}}
+function annTap(e){const f=ck.cur;if(!f.photo){document.getElementById('cam').click();return}
+ const r=e.currentTarget.getBoundingClientRect();f.pt={x:Math.round((e.clientX-r.left)/r.width*100),y:Math.round((e.clientY-r.top)/r.height*100)};soft()}
+function shrink(file,max=720,q=.6){return new Promise((res,rej)=>{const url=URL.createObjectURL(file),im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',q))};im.onerror=()=>rej(new Error('bad image'));im.src=url})}
+async function addPhoto(file){if(!file||!ck||!ck.cur)return;try{ck.cur.photo=await shrink(file);ck.cur.pt=null}catch(e){toast('Could not read that image.',null,false)}soft()}
+function saveFind(){const f=ck.cur;if(f.isNew){delete f.isNew;ck.finds.push(f)}ck.done[f.key]=true;ck.cur=null;ck.step=1;toast('Finding saved',null);soft()}
+function delFind(){const f=ck.cur;ck.finds=ck.finds.filter(x=>x.id!==f.id);ck.cur=null;ck.step=1;soft()}
+function ck3(){const b=S.buildings.find(x=>x.id===ck.b),items=Object.values(ck.done).filter(Boolean).length,ph=ck.finds.filter(f=>f.photo).length,ps=pendingSync();
+ return `<div class="ph-h"><button class="xb" onclick="ck.step=1;soft()" aria-label="Back">‹</button><b>Review &amp; Submit</b><span style="width:34px"></span></div>
+ <div class="ckc"><div class="ckt"><span>Inspection Summary</span></div>
+  <div class="li"><span>Building</span><span class="sumv">${esc(b?b.name:'')}</span></div><div class="li"><span>Checklist items</span><span class="sumv">${items}</span></div>
+  <div class="li"><span>Issues found</span><span class="sumv">${ck.finds.length}</span></div><div class="li"><span>Photos attached</span><span class="sumv">${ph}</span></div></div>
+ ${ck.finds.length?`<div class="ckc"><div class="ckt"><span>Findings</span></div>${ck.finds.map(f=>`<div class="li"><div><b>${esc(f.label)}</b><small>${esc(f.cat)}${f.tag?' · '+esc(f.tag):''}</small></div><div style="display:flex;gap:8px;align-items:center"><span class="pill p${{critical:'R',high:'O',medium:'Y',low:'G'}[f.sev]}">${f.sev}</span><button class="xb" onclick="editFind(${f.id})" aria-label="Edit finding">✎</button></div></div>`).join('')}</div>`:''}
+ <div class="ckc"><div class="ckt"><span>Confirmation</span></div><div class="f2"><div><label style="margin-top:0">Inspector name</label><input value="${esc(ck.by)}" oninput="ck.by=this.value" placeholder="Your name"></div><div><label style="margin-top:0">Next due</label><input type="date" value="${ck.due}" onchange="ck.due=this.value"></div></div>
+ <label class="cf"><input type="checkbox" ${ck.confirm?'checked':''} onchange="ck.confirm=this.checked"><span>I confirm that this inspection is accurate and complete</span></label>
+ <button class="btn pri wide" style="margin-top:0" onclick="submitCk()">SUBMIT REPORT</button></div>
+ <div class="offl"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9.5 3.5 3.5 0 0 1 17.5 18z"/></svg><div>Works offline, syncs on WiFi<small><span class="ob" style="background:${navigator.onLine?'var(--g)':'var(--o)'}"></span>${navigator.onLine?'Online':'Offline: reports queue on this device'} · demo sync is simulated${ps?` · ${ps} waiting`:''}</small></div></div>`}
+function submitCk(){const b=S.buildings.find(x=>x.id===ck.b);if(!b)return;
+ if(!ck.by.trim()){toast('Enter the inspector name first.',null,false);return}
+ if(!ck.confirm){toast('Tick the confirmation box to submit.',null,false);return}
+ const dn=Object.values(ck.done).filter(Boolean).length;
+ if(!dn&&!ck.finds.length){toast('Complete at least one checklist item first.',null,false);return}
+ try{localStorage.setItem('amphr_insp',ck.by)}catch(e){}
+ const cnt=s=>ck.finds.filter(f=>f.sev===s).length,safety=ck.finds.filter(f=>f.cat==='Safety & Access').length;
+ const [a,z]=applyInspection(b,{date:iso(today()),by:ck.by.trim(),notes:`Field checklist: ${dn} items checked, ${ck.finds.length} issue(s).`+(ck.finds.length?' '+ck.finds.map(f=>f.label+(f.tag?' ('+f.tag+')':'')).join('; ')+'.':''),crit:cnt('critical'),high:cnt('high'),safety,due:ck.due});
+ const rec=S.inspections[S.inspections.length-1];rec.findings=ck.finds.map(f=>({item:f.label,cat:f.cat,sev:f.sev,tag:f.tag,notes:f.notes,photo:f.photo}));
+ const off=!navigator.onLine;if(off)rec.synced=false;
+ save();ck=null;toast(off?'Saved offline. Will sync on WiFi':'Report submitted · building health updated',`${a}% to ${z}%`);go('detail',b.id)}
+window.addEventListener('online',()=>{const q=S.inspections.filter(i=>i.synced===false);if(q.length){q.forEach(i=>i.synced=true);save();toast(`Synced ${q.length} offline report${q.length>1?'s':''}`,null);if(tab==='insp')soft()}});
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 render();
 </script></body></html>
