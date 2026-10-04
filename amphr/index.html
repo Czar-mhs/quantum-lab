@@ -86,6 +86,32 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);font-weight:600;cursor:pointer;margin-bottom:14px;background:none;border:0;font-family:inherit;font-weight:600;font-size:15px;padding:4px 0}
 .dtop{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
 .empty{color:var(--mut);padding:20px;text-align:center}
+
+/* floor plan */
+.pgrid{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start}
+.map{padding:0;overflow:hidden;background:#06090b}
+.map svg{display:block;width:100%;height:auto;touch-action:none;cursor:grab;user-select:none}.map svg:active{cursor:grabbing}.map.place svg{cursor:crosshair}
+.mtag{position:absolute;left:14px;top:14px;z-index:2;font-size:12.5px;font-weight:600;background:rgba(255,255,255,.07);border:1px solid var(--line);padding:6px 12px;border-radius:10px;backdrop-filter:blur(8px)}
+.mtools{position:absolute;right:12px;bottom:12px;z-index:2;display:flex;flex-direction:column;gap:8px}
+.mtools button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(21,26,30,.85);color:var(--tx);font-size:20px;cursor:pointer;backdrop-filter:blur(8px)}
+.mtools button.on{background:var(--teal);color:#00110f;border-color:var(--teal)}
+.mhint{position:absolute;left:14px;bottom:12px;z-index:2;font-size:12px;color:var(--mut);display:flex;align-items:center;gap:8px}
+.mhint i{display:block;width:54px;height:6px;border:2px solid var(--mut);border-top:0}
+.gpr{transition:opacity .25s}
+.pin{cursor:pointer}.pin .ring2{fill:none;stroke-width:3;opacity:0}.pin.sel .ring2{opacity:1;animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{r:14;opacity:.9}100%{r:44;opacity:0}}
+@media(prefers-reduced-motion:reduce){.pin.sel .ring2{animation:none}}
+.dpanel h3{margin-bottom:6px}
+.dk{display:grid;gap:14px;margin-top:10px}.dk div small{display:block;color:var(--mut);font-size:12.5px;margin-bottom:2px}.dk div b{font-weight:620;font-size:15px}
+.sev{display:block;text-align:center;padding:9px;border-radius:10px;font-weight:700;font-size:13px;letter-spacing:.06em;color:#0b0f10}
+.s-critical{background:var(--r)}.s-high{background:var(--o)}.s-medium{background:var(--y)}.s-low{background:var(--g)}
+.dhead{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.04);border-radius:14px;padding:12px 14px}
+.dl{display:flex;gap:10px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none;margin-top:16px}.dl::-webkit-scrollbar{display:none}
+.dl button{flex:none;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--s2);color:var(--tx);padding:9px 14px;border-radius:12px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer}
+.dl button.on{border-color:var(--teal)}.dl s{width:9px;height:9px;border-radius:50%;text-decoration:none}
+@media(max-width:980px){.pgrid{grid-template-columns:1fr}}
+@media(max-width:760px){.mtools button{width:38px;height:38px}.mhint{display:none}}
+
 /* tabbar (phone) */
 .tabbar{display:none}
 /* iPad: icon rail */
@@ -141,8 +167,25 @@ assets:[
 inspections:[
 {id:1,b:2,date:d(-210),by:'Demo Inspector',notes:'Spalling on level 3 slab; fire pump pressure low.'},
 {id:2,b:4,date:d(-400),by:'Demo Inspector',notes:'Roof membrane failure, water ingress.'}],
+defects:[
+{id:241,b:2,level:3,zone:'A',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-6),x:430,y:200,health:46},
+{id:242,b:2,level:3,zone:'C',type:'Paint peeling \u2013 Wall',sev:'low',status:'Open',det:d(-12),x:800,y:190,health:88},
+{id:243,b:2,level:3,zone:'B',type:'Water ingress \u2013 Ceiling',sev:'medium',status:'In progress',det:d(-4),x:600,y:330,health:66},
+{id:244,b:2,level:3,zone:'A',type:'Hairline crack \u2013 Wall',sev:'low',status:'Open',det:d(-20),x:230,y:350,health:90},
+{id:245,b:2,level:3,zone:'C',type:'Efflorescence \u2013 Wall',sev:'medium',status:'Open',det:d(-2),x:810,y:470,health:64},
+{id:246,b:2,level:3,zone:'A',type:'Joint sealant failure',sev:'low',status:'Resolved',det:d(-30),x:210,y:560,health:86},
+{id:247,b:2,level:3,zone:'C',type:'Corroded rebar \u2013 Beam',sev:'high',status:'Open',det:d(-1),x:690,y:590,health:44},
+{id:248,b:2,level:3,zone:'B',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(0),x:520,y:470,health:28},
+{id:249,b:4,level:2,zone:'B',type:'Membrane failure \u2013 Roof slab',sev:'critical',status:'Open',det:d(-15),x:470,y:250,health:24},
+{id:250,b:4,level:2,zone:'C',type:'Spalling \u2013 Column',sev:'critical',status:'Open',det:d(-9),x:780,y:520,health:30},
+{id:251,b:4,level:2,zone:'A',type:'Cracking \u2013 Beam',sev:'high',status:'In progress',det:d(-5),x:240,y:330,health:48},
+{id:252,b:5,level:4,zone:'B',type:'Water ingress \u2013 Wall',sev:'medium',status:'Open',det:d(-8),x:560,y:560,health:62},
+{id:253,b:5,level:4,zone:'C',type:'Cracking \u2013 Slab',sev:'high',status:'Open',det:d(-3),x:780,y:220,health:50},
+{id:254,b:1,level:12,zone:'A',type:'Sealant failure \u2013 Facade',sev:'high',status:'In progress',det:d(-7),x:300,y:210,health:52}],
+did:255,
 nid:10}}
 let S;try{S=JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){S=seed()}
+if(!S.defects){const z=seed();S.defects=z.defects;S.did=z.did}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 // Health score v1 (per MVP spec)
 function health(b){
@@ -169,14 +212,15 @@ const IC={
  comp:'<path d="M12 3 4 6v6c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
  assets:'<path d="M21 8 12 3 3 8l9 5zM3 8v8l9 5 9-5V8M12 13v8"/>',
  insp:'<path d="M9 4h6l1 2h3a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3z"/><path d="m9 14 2 2 4-4"/>',
- add:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>'};
-const tabs=[['dash','Portfolio'],['comp','Compliance'],['assets','Assets'],['insp','Inspect'],['add','Add']];
+ add:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+ plan:'<path d="M3 3h18v18H3zM3 10h8M11 3v18M11 15h10"/><circle cx="16" cy="6.5" r="1.4"/>'};
+const tabs=[['dash','Portfolio'],['plan','Floor plan'],['comp','Compliance'],['assets','Assets'],['insp','Inspect']];
 let tab='dash',sel=null,flt=-1,q='';
 function nav(){
  document.getElementById('nav').innerHTML=tabs.map(([k,l])=>`<button class="nv ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')" aria-label="${l}"><svg viewBox="0 0 24 24">${IC[k]}</svg><span>${l}</span></button>`).join('');
  document.getElementById('tabbar').innerHTML=tabs.map(([k,l])=>`<button class="tb ${tab===k||(tab==='detail'&&k==='dash')?'on':''}" onclick="go('${k}')"><svg viewBox="0 0 24 24">${IC[k]}</svg>${l}</button>`).join('')}
 function go(k,id){tab=k;sel=id??null;render()}
-function render(){nav();document.getElementById('v').innerHTML=({dash,comp,assets,insp,add,detail})[tab]();window.scrollTo(0,0)}
+function render(){nav();document.getElementById('v').innerHTML=({dash,comp,assets,insp,add,detail,plan:planPage})[tab]();if(tab==='plan')planDraw();window.scrollTo(0,0)}
 const head=(t,s,r='')=>`<div class="top"><div><h1>${t}</h1><div class="sub">${s}</div></div>${r}</div>`;
 function dash(){
  const all=S.buildings.map(b=>({b,h:health(b)}));
@@ -259,5 +303,92 @@ async function imp(f){if(!f)return;const rows=parseCSV(await f.text()).slice(1);
  rows.forEach(r=>{const[b,name,type,status]=r.map(x=>x.trim());
   if(S.buildings.some(x=>x.id===+b)&&name&&type&&['Good','Fair','Poor','Critical'].includes(status)){S.assets.push({id:S.nid++,b:+b,name,type,status});n++}else bad++});
  save();alert(`Imported ${n} assets. Skipped ${bad} invalid rows.`);render()}
+// ---- Floor plan with defects
+const SEV={critical:['Critical','var(--r)',28],high:['High','var(--o)',46],medium:['Medium','var(--y)',66],low:['Low','var(--g)',88]};
+const sevHex={critical:'#f87171',high:'#fb923c',medium:'#fbbf24',low:'#34d399'};
+let pb=null,plv=null,gpr=true,selD=null,placing=false,draft=null,vz=1,vcx=500,vcy=350,moved=false,drag=null;
+const did=d=>'D-'+String(d.id).padStart(4,'0');
+const lvl=n=>'Level '+String(n).padStart(2,'0');
+const detLabel=t=>{const n=Math.round((today()-new Date(t).getTime())/DAY);return n<=0?'Today':n===1?'Yesterday':t};
+const zoneOf=x=>x<350?'A':x<650?'B':'C';
+function planInit(){
+ if(!S.buildings.find(b=>b.id===pb)){const c={};S.defects.forEach(d=>c[d.b]=(c[d.b]||0)+1);
+  const best=S.buildings.map(b=>[b,c[b.id]||0]).sort((a,z)=>z[1]-a[1])[0];pb=best?best[0].id:null;plv=null}
+ const ds=S.defects.filter(d=>d.b===pb);
+ if(plv==null)plv=ds.length?ds[0].level:1;
+}
+function planPage(){
+ planInit();
+ if(pb==null)return head('Floor plan','Add a building first');
+ const b=S.buildings.find(x=>x.id===pb),n=Math.min(b.floors,80);
+ const lv=new Set(Array.from({length:n},(_,i)=>i+1));S.defects.filter(d=>d.b===pb).forEach(d=>lv.add(d.level));
+ return head('Floor plan','Defect locations and severity · tap a pin for details',
+  `<div class="actions" style="margin:0"><button class="btn ${placing?'or':'pri'}" onclick="togglePlace()">${placing?'Tap the plan to place pin…':'+ Log defect'}</button></div>`)+
+ `<div class="tools"><select style="flex:1;min-width:200px;max-width:320px" onchange="pb=+this.value;plv=null;selD=null;placing=false;draft=null;resetView();render()">${S.buildings.map(x=>`<option value="${x.id}" ${x.id===pb?'selected':''}>${esc(x.name)}</option>`).join('')}</select>
+  <select style="width:150px" onchange="plv=+this.value;selD=null;placing=false;draft=null;resetView();planDraw()">${[...lv].sort((a,z)=>a-z).map(l=>`<option value="${l}" ${l===plv?'selected':''}>${lvl(l)}</option>`).join('')}</select>
+  <div class="legend" style="margin-left:auto">${Object.entries(SEV).map(([k,v])=>`<span><s style="background:${v[1]}"></s>${v[0]}</span>`).join('')}</div></div>
+  <div id="pl"></div>`;
+}
+function planDraw(){
+ const el=document.getElementById('pl');if(!el)return;
+ const ds=S.defects.filter(d=>d.b===pb&&d.level===plv);
+ const sd=ds.find(d=>d.id===selD)||null;
+ const walls=[[330,140,330,300],[560,60,560,300],[740,60,740,300],[330,300,620,300],[690,300,900,300],[130,400,430,400],[430,400,430,640],[130,520,300,520],[620,400,900,400],[620,400,620,640],[780,520,900,520]];
+ const blobs=[[430,200,120,.55],[560,330,140,.6],[520,470,170,.7],[300,520,150,.45],[790,200,110,.4],[700,560,130,.5],[240,330,110,.4],[820,470,100,.35]];
+ const PIN='M0 0C-10-14-17-22-17-31a17 17 0 1 1 34 0C17-22 10-14 0 0Z';
+ const pinSvg=d=>`<g class="pin ${d.id===selD?'sel':''}" transform="translate(${d.x} ${d.y})" onclick="pickD(${d.id})" style="${d.status==='Resolved'?'opacity:.45':''}">
+  <circle class="ring2" cx="0" cy="-30" r="14" stroke="${sevHex[d.sev]}"/>
+  <path d="${PIN}" fill="${sevHex[d.sev]}" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><circle cx="0" cy="-31" r="6.5" fill="#0b0f10"/></g>`;
+ const vw=1000/vz,vh=700/vz;
+ const svg=`<svg id="psvg" viewBox="${vcx-vw/2} ${vcy-vh/2} ${vw} ${vh}" onpointerdown="pdn(event)" onpointermove="pmv(event)" onpointerup="pup(event)" onpointerleave="pup(event)" onclick="mapClick(event)" role="img" aria-label="Floor plan with defect pins">
+  <defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="rgba(0,194,180,.10)" stroke-width="1"/></pattern>
+  <radialGradient id="bl"><stop offset="0" stop-color="#00c2b4" stop-opacity=".9"/><stop offset="1" stop-color="#00c2b4" stop-opacity="0"/></radialGradient>
+  <filter id="bf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+  <rect x="-400" y="-300" width="1800" height="1300" fill="#06090b"/><rect x="-400" y="-300" width="1800" height="1300" fill="url(#grid)"/>
+  <path d="M130 140H330V60H900V640H130Z" fill="rgba(255,255,255,.025)"/>
+  <g class="gpr" style="opacity:${gpr?1:0}" filter="url(#bf)">${blobs.map(([x,y,r,o])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#bl)" opacity="${o}"/>`).join('')}</g>
+  <g stroke="#56636a" stroke-width="6" stroke-linecap="square" fill="none"><path d="M130 140H330V60H900V640H130Z" stroke-linejoin="miter"/>${walls.map(w=>`<path d="M${w[0]} ${w[1]}L${w[2]} ${w[3]}"/>`).join('')}</g>
+  <g stroke="#56636a" stroke-width="3" fill="none"><path d="M620 300a35 35 0 0 1 35 35"/><path d="M430 520a40 40 0 0 1 40 40"/><path d="M620 500a38 38 0 0 0 38-38"/></g>
+  <g fill="rgba(255,255,255,.07)" font-size="26" font-weight="700" letter-spacing="4" text-anchor="middle"><text x="230" y="470">ZONE A</text><text x="450" y="260">ZONE B</text><text x="820" y="360">ZONE C</text></g>
+  ${ds.map(pinSvg).join('')}${draft&&draft.b===pb&&draft.level===plv?`<g transform="translate(${draft.x} ${draft.y})"><path d="${PIN}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5 4"/></g>`:''}
+  </svg>`;
+ let panel;
+ if(draft&&draft.b===pb&&draft.level===plv){
+  panel=`<h3>New defect</h3><div class="sub">${lvl(plv)}, Zone ${zoneOf(draft.x)}</div><form onsubmit="saveDefect(event)"><label>Type</label><input name="type" required placeholder="e.g. Cracking – Slab"><label>Severity</label><select name="sev"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="critical">Critical</option></select>
+  <div class="actions"><button class="btn pri">Save defect</button><button type="button" class="btn" onclick="draft=null;planDraw()">Cancel</button></div></form>`;
+ }else if(sd){
+  panel=`<h3>Defect Details</h3><div class="dk"><div class="dhead"><div><small>Defect ID</small><b>${did(sd)}</b></div><svg width="30" height="38" viewBox="-20 -38 40 44"><path d="${PIN}" fill="${sevHex[sd.sev]}"/><circle cx="0" cy="-31" r="6.5" fill="#0b0f10"/></svg></div>
+  <div><small>Location</small><b>${lvl(sd.level)}, Zone ${sd.zone}</b></div><div><small>Type</small><b>${esc(sd.type)}</b></div><div><small>Health Score</small><b style="color:${SEV[sd.sev][1]}">${sd.health}%</b></div>
+  <div><small>Severity</small><span class="sev s-${sd.sev}">${SEV[sd.sev][0].toUpperCase()}</span></div>
+  <div><small>Status</small><select onchange="setStatus(${sd.id},this.value)">${['Open','In progress','Resolved'].map(x=>`<option ${x===sd.status?'selected':''}>${x}</option>`).join('')}</select></div>
+  <div><small>Detected</small><b>${detLabel(sd.det)}</b></div></div><div class="actions"><button class="btn danger" onclick="delD(${sd.id})">Delete defect</button></div>`;
+ }else{
+  const c={critical:0,high:0,medium:0,low:0};ds.forEach(d=>c[d.sev]++);
+  panel=`<h3>${lvl(plv)} summary</h3><div class="sub">${ds.length?ds.length+' defect'+(ds.length>1?'s':'')+' on this level. Select a pin for details.':'No defects recorded on this level.'}</div>
+  <div class="dk">${Object.entries(SEV).map(([k,v])=>`<div class="dhead"><b>${v[0]}</b><b style="color:${v[1]}">${c[k]}</b></div>`).join('')}</div>`;
+ }
+ el.innerHTML=`<div class="pgrid"><div class="card map ${placing?'place':''}" style="position:relative"><div class="mtag">Proposed V1.0</div>${svg}
+  <div class="mhint"><i></i>10 m</div>
+  <div class="mtools"><button class="${gpr?'on':''}" title="GPR overlay" onclick="gpr=!gpr;planDraw()" style="font-size:12px;font-weight:700">GPR</button><button onclick="zoom(1.3)" aria-label="Zoom in">+</button><button onclick="zoom(1/1.3)" aria-label="Zoom out">−</button><button onclick="resetView();planDraw()" aria-label="Reset view" style="font-size:16px">⤢</button></div></div>
+  <div class="card dpanel">${panel}</div></div>
+  <div class="dl">${ds.map(d=>`<button class="${d.id===selD?'on':''}" onclick="pickD(${d.id})"><s style="background:${sevHex[d.sev]}"></s>${did(d)} · ${esc(d.type)}</button>`).join('')}</div>`;
+}
+function resetView(){vz=1;vcx=500;vcy=350}
+function zoom(f){vz=Math.min(4,Math.max(1,vz*f));if(vz===1){vcx=500;vcy=350}clampView();planDraw()}
+function clampView(){const hw=500/vz,hh=350/vz;vcx=Math.min(1000-hw+150,Math.max(hw-150,vcx));vcy=Math.min(700-hh+100,Math.max(hh-100,vcy))}
+function pickD(id){if(moved)return;selD=id;draft=null;placing=false;const d=S.defects.find(x=>x.id===id);if(d&&vz>1){vcx=d.x;vcy=d.y-30;clampView()}planDraw();if(innerWidth<=980){const p=document.querySelector('.dpanel');p&&p.scrollIntoView({behavior:'smooth',block:'start'})}}
+function togglePlace(){placing=!placing;draft=null;selD=null;render()}
+function pdn(e){moved=false;drag={x:e.clientX,y:e.clientY,cx:vcx,cy:vcy}}
+function pmv(e){if(!drag)return;const svg=document.getElementById('psvg'),r=svg.getBoundingClientRect(),dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+ if(Math.abs(dx)+Math.abs(dy)>6)moved=true;if(!moved||vz===1)return;
+ vcx=drag.cx-dx*(1000/vz)/r.width;vcy=drag.cy-dy*(700/vz)/r.height;clampView();const vw=1000/vz,vh=700/vz;svg.setAttribute('viewBox',`${vcx-vw/2} ${vcy-vh/2} ${vw} ${vh}`)}
+function pup(){drag=null;setTimeout(()=>moved=false,0)}
+function mapClick(e){if(!placing||moved)return;if(e.target.closest&&e.target.closest('.pin'))return;
+ const svg=document.getElementById('psvg'),p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(svg.getScreenCTM().inverse());
+ if(q.x<130||q.x>900||q.y<70||q.y>640)return;draft={b:pb,level:plv,x:Math.round(q.x),y:Math.round(q.y)};placing=false;selD=null;render()}
+function saveDefect(e){const f=fd(e);S.defects.push({id:S.did++,b:pb,level:plv,zone:zoneOf(draft.x),type:f.type,sev:f.sev,status:'Open',det:iso(today()),x:draft.x,y:draft.y,health:SEV[f.sev][2]});
+ selD=S.defects[S.defects.length-1].id;draft=null;save();planDraw()}
+function setStatus(id,v){const d=S.defects.find(x=>x.id===id);if(d){d.status=v;save();planDraw()}}
+function delD(id){if(!confirm('Delete this defect?'))return;S.defects=S.defects.filter(d=>d.id!==id);selD=null;save();planDraw()}
 render();
 </script></body></html>
