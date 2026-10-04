@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(sha1sum:*)",
+      "Bash(base64:*)",
+      "Bash(wc:*)",
+      "Bash(node:*)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}
