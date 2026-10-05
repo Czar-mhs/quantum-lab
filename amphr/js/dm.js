@@ -1,4 +1,8 @@
 // Dubai Municipality (DM) structural modification permit pack: NDT scope, report contents, consultant deliverables
+// registers its own nav entry so the core files stay untouched
+IC.dm='<path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6M12 9v.01"/>';
+TABS.splice(TABS.findIndex(t=>t[0]==='comp')+1,0,['dm','DM Permit']);MORE.push('dm');
+addEventListener('load',()=>{const m=PAGES.more;PAGES.more=()=>m().replace('<div class="card bc" onclick="go(\'assets\')">',`<div class="card bc" onclick="go('dm')"><div class="h"><div class="eqi"><svg viewBox="0 0 24 24">${IC.dm}</svg></div><div><h4>DM Permit</h4><p>Dubai Municipality NDT scope, report contents and readiness</p></div></div></div><div class="card bc" onclick="go('assets')">`)});
 const DM_TYPES={
  slab:{n:'Slab penetrations / trenching',eg:'MEP risers, staircases, escalators',scope:['GPR scanning (high frequency)','Cover meter / Ferroscan'],aim:'Map top and bottom rebar, verify bar spacing, and avoid severing post-tensioning (PT) tendons or critical shear links.',tests:['gpr','cover'],man:[]},
  vert:{n:'Vertical extension / mezzanine',eg:'Adds column and dead loads',scope:['Core extraction and compressive testing','Ultrasonic pulse velocity (UPV)','Geotechnical re-evaluation (if foundation load increases)'],aim:'Determine existing fcu / characteristic strength (fck), verify no internal honeycombing or delamination, and confirm foundation bearing adequacy.',tests:['upv'],man:['core','geo']},
