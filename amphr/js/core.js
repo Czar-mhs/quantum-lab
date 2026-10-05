@@ -127,12 +127,13 @@ add:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
 plan:'<path d="M3 3h18v18H3zM3 10h8M11 3v18M11 15h10"/><circle cx="16" cy="6.5" r="1.4"/>',
 spots:'<path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.3"/>',
 equip:'<path d="M4 14a8 8 0 0 1 16 0M12 14l4-5M3 18h18"/><circle cx="12" cy="14" r="1.2"/>',
+dm:'<path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6M12 9v.01"/>',
 rep:'<path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12h6M10 16h6"/>',
 set:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
 more:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>'};
-const TABS=[['dash','Portfolio'],['spots','Spots'],['plan','Floor plan'],['equip','Equipment'],['insp','Inspect'],['comp','Compliance'],['rep','Reports'],['assets','Assets'],['set','Settings']];
+const TABS=[['dash','Portfolio'],['spots','Spots'],['plan','Floor plan'],['equip','Equipment'],['insp','Inspect'],['comp','Compliance'],['dm','DM Permit'],['rep','Reports'],['assets','Assets'],['set','Settings']];
 const PHONE=[['dash','Portfolio'],['spots','Spots'],['equip','Equipment'],['rep','Reports'],['more','More']];
-const PARENT={detail:'dash',add:'dash',spot:'spots',eq:'equip',eqform:'equip'},MORE=['plan','insp','comp','assets','set','more'];
+const PARENT={detail:'dash',add:'dash',spot:'spots',eq:'equip',eqform:'equip'},MORE=['plan','insp','comp','dm','assets','set','more'];
 const PAGES={},AFTER={};
 let tab='dash',sel=null,flt='all',q='';
 const onTab=(k,t)=>k===t||PARENT[t]===k||(k==='more'&&MORE.includes(t));
