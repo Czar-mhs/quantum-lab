@@ -5,3 +5,6 @@
 .ck b{font-size:14px;font-weight:600}.ck small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
 .dmscope{margin-top:14px;padding:14px;border-radius:14px;background:var(--s2);border:1px solid var(--line)}.dmscope ul{margin:8px 0 10px 18px;padding:0}.dmscope small{color:var(--mut)}
 .dmbig{font-size:56px;font-weight:800;letter-spacing:-.04em;line-height:1;margin:8px 0 14px}
+
+/* authority switch */
+.authc{margin-bottom:16px}.authh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
